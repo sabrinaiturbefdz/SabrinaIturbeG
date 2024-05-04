@@ -5,7 +5,12 @@
 		},
 		{
 			"path": "../CYBER360"
+		},
+		{
+			"path": "../ITM 101"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "WDD 130"
+	}
 }
