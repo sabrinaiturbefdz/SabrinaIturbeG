@@ -1,0 +1,155 @@
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+    background-image: url('https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+  
+
+header {
+  background-color: #D4A33B;
+  color: #333;
+  padding: 5px 0;
+  text-align: center; 
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.header-content img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  justify-content: left;
+}
+
+.header .header-content a:link{ 
+  color:aqua
+
+},
+.header .header-content a:visited {
+  color: #333;
+}
+
+.header .header-content a:hover {
+  color: #396E94;
+}
+
+.header .header-content a:active {
+  color: #396E94;
+}
+
+
+h1 {
+  margin: 0;
+}
+
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center; /* Center aligns the navigation links */
+  align-items: center;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+.hero-banner {
+  position: relative;
+}
+
+.hero-banner img {
+  width: 70%;
+  height: auto;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+.card h1,
+.card h3 {
+  color: #E7801C;
+}
+
+.card img {
+  width: 100px; 
+  height: 100px; 
+}
+
+footer {
+  background-color: #D4A33B;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+}
+
+.footer-card {
+  flex: 1; 
+  margin: 0 10px; 
+}
+
+.footer-card img {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px; 
+}
+
+.footer-card a {
+  text-decoration: none;
+  color: #333;
+}
+
+.footer-card a:hover {
+  color: #E7801C;
+}
+
+.footer-card a:link,
+.footer-card a:visited {
+  color: #333;
+}
+
+.footer-card a:hover {
+  color: #396E94;
+}
+
+
+.footer-card-socialmedia img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+/* Media Query for Responsive Design */
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+}
