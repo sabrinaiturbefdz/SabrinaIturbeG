@@ -1,0 +1,47 @@
+/* *{
+    border: 2px solid blue;
+}    Use this to display a border around everything in your page to troubleshoot*/
+
+body {
+margin:0;
+
+}
+
+nav, footer {
+    background-color: steelblue;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+a:hover {
+    background-color: white;
+    color: steelblue;
+}
+
+a {
+    font-size: 1.5em;  /* 150% of the original size/* 
+}
+
+main {
+/* font-size: 0; */
+text-align: center;
+}
+
+p {
+    width: 80%;
+}
+
+image {
+    width: 45%;
+    display: block;
+     margin: 0 auto;  /*center an image if text-align center does not work in main*/
+}
+
+footer p {
+    font-size: 20px;
+    margin: 20px auto;
+}
+
+
+
