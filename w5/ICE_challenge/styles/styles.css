@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid black; /* Add border to all elements */
+    /* border: 1px solid black; */
 }
 
 html, body {
@@ -19,7 +19,7 @@ html, body {
 
 .top-section {
     flex: 0 0 60%;
-    background: url('images/w05_circles.jpg') no-repeat center center;
+    background: url('/w5/ICE_challenge/images/w05_circles.jpg') no-repeat center center;
     background-size: cover; /* Ensures the image covers the entire section */
 }
 
