@@ -19,7 +19,7 @@ html, body {
 
 .top-section {
     flex: 0 0 60%;
-    background: url('../images/w05_circles.jpg') no-repeat center center;
+    background: url('w05_circles.jpg') no-repeat center center;
     background-size: cover; /* image covers the entire section */
 }
 
