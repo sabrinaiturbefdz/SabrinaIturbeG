@@ -19,8 +19,8 @@ html, body {
 
 .top-section {
     flex: 0 0 60%;
-    background: url('/w5/ICE_challenge/images/w05_circles.jpg') no-repeat center center;
-    background-size: cover; /* image covers the entire section */
+    background: url('../images/w05_circles.jpg') no-repeat center center;
+    background-size: cover; /*image covers the entire section */
 }
 
 .bottom-section {
