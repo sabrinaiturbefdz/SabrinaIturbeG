@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid black; /* Add border to all elements */
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-section {
+    flex: 0 0 60%;
+    background: url('images/w05_circles.jpg') no-repeat center center;
+    background-size: cover; /* Ensures the image covers the entire section */
+}
+
+.bottom-section {
+    flex: 0 0 40%;
+    background-color: #737373;
+    display: flex;
+    justify-content: space-evenly; /* Distributes space evenly between items */
+    align-items: center;
+}
+
+.circle-image {
+    height: 30vh; /* 30% of the viewport height */
+    width: 30vh; /* Maintains the ratio as a circle */
+    border-radius: 50%;
+}
