@@ -1,109 +1,148 @@
 :root {
-    --primary-color: #dac3a4;
-    --secondary-color: #D4A33B;
-    --accent1-color: #E7801C;
-    --accent2-color: #141E0DB3;
-    --white-color: #FFFFFF;
-  }
-  
-  body {
-    background-color: var(--white-color);
-  }
-  
-  #content {
-    max-width: 1600px;
-    margin: 0 auto;
-  }
-  
-  #background {
-    height: 725px;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-  }
-  
-  header {
-    background-color: rgba(20, 30, 13, 0.7);
-    color: var(--white-color);
-  }
-  
-  nav a {
-    color: white;
-    text-align: center;
-    text-decoration: none;
-  }
-  
-  nav a:hover {
-    background-color: var(--accent2-color);
-    color: var(--white-color);
-  }
-  
-  #hero-msg h1, #hero-msg h4, .button-box, main section {
-    text-align: center;
-  }
-  
-  .home-title {
-    color: var(--accent2-color);
-  }
-  
-  h4 {
-    color: #666;
-  }
-  
-  .book, .join {
-    background-color: var(--secondary-color);
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .book:hover, .join:hover {
-    background-color: var(--accent1-color);
-    color: #000;
-  }
-  
-  .msg {
-    background-color: var(--accent2-color);
-    color: #000;
-  }
-  
-  .msg h2 {
-    color: whitesmoke;
-  }
-  
-  .msg p {
-    color:  whitesmoke;
-  }
-  
-  footer {
-    background-color: var(--accent2-color);
-    color: var(--white-color);
-  }
-  
-  footer a {
-    color: #ccc;
-    text-decoration: none;
-  }
-  
-  footer a:hover {
-    color: var(--white-color);
-  }
-  
-  footer p {
-    font-size: 1.2em;
-  }
-  
-  footer p a:hover {
-    text-decoration: underline;
-  }
-  
-  .logo {
-    width: 80px;
-  }
-  
-  .icon {
-    width: 80px;
-  }
-  
-  #hero-img {
-    width: 100%;
-  }
-  
+  --primary-color: #dac3a4;
+  --secondary-color: #D4A33B;
+  --accent1-color: #E7801C;
+  --accent2-color: #141E0DB3;
+  --white-color: #FFFFFF;
+}
+
+body {
+  background-color: #fcfbfb;
+  font-family: Raleway, Arial, sans-serif;
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+#content {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+#background {
+  height: 725px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+header {
+  background-color: rgba(20, 30, 13, 0.7);
+  color: var(--white-color);
+}
+
+nav a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 35px;
+}
+
+nav a:hover {
+  background-color: var(--accent2-color);
+  color: var(--white-color);
+}
+
+#hero-msg h1, #hero-msg h4, .button-box, main section {
+  text-align: center;
+}
+
+.home-title {
+  font-family: 'Rock Salt', 'Bradley Hand', sans-serif;
+  font-size: 2em;
+  color: var(--accent2-color);
+  margin-top: 10px;
+}
+
+h4 {
+  color: #666;
+}
+
+.book, .join {
+  background-color: var(--secondary-color);
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 15px 30px;
+  margin-top: 50px;
+  border-radius: 5px;
+}
+
+.book:hover, .join:hover {
+  background-color: var(--accent1-color);
+  color: #000;
+}
+
+.msg {
+  background-color: var(--accent2-color);
+  color: #000;
+  line-height: 1.5em;
+  padding: 35px;
+}
+
+.msg h2 {
+  color: whitesmoke;
+}
+
+.msg p {
+  color:  whitesmoke;
+  font-size: 0.8em;
+  padding-bottom: 15px;
+}
+
+footer {
+  background-color: var(--accent2-color);
+  color: var(--white-color);
+  padding: 25px 50px;
+  margin-top: 200px;
+}
+
+footer a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--white-color);
+}
+
+footer p {
+  font-size: 1.2em;
+}
+
+footer p a:hover {
+  text-decoration: underline;
+}
+
+footer .social img {
+  padding-top: 15px;
+}
+
+.logo {
+  width: 80px;
+  padding-top: 5px;
+}
+
+.icon {
+  width: 80px;
+  padding-top: 10px;
+}
+
+#hero-img {
+  width: 100%;
+}
+
+.rivers-card, .camping-card, .rapids-card {
+  margin: 200px 0;
+}
+
+.card-img {
+  border: 10px solid #d9c2a3;
+}
+
+main section img {
+  box-sizing: border-box;
+}
