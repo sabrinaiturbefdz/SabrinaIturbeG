@@ -1,0 +1,47 @@
+/* Remove body margin */
+body {
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 sections of the grid */
+    grid-template-rows: 100vh;
+    position: relative; 
+}
+
+.grid-item-2 {
+    background-color: #b9b8b9; /* Background grid 2 */
+}
+
+.grid-image { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    letter-spacing: 0.1em; 
+    font-size: 20em;
+    text-align: center;
+    grid-column: 1 / span 2;
+    width: 100%;
+}
+
+.cherries-text {
+    position: absolute;
+    top: 70%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    color: #9c0e11;
+    font-size: 8.5em;
+    letter-spacing: 0.2em; 
+    grid-column: 1 / span 2;
+    width: 100%;
+    text-align: center;
+}
