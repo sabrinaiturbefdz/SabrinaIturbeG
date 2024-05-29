@@ -27,7 +27,7 @@ body {
     transform: translate(-50%, -50%);
     color: black;
     letter-spacing: 0.1em; 
-    font-size: 20em;
+    font-size: 15em;
     text-align: center;
     grid-column: 1 / span 2;
     width: 100%;
