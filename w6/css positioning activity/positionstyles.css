@@ -34,126 +34,194 @@
 /* Activity 2 styles */ 
 .content2 {
   /* This is the parent of the activity 2 boxes. */
+  display: grid;
+  width: 280px; /* Set the width to 280px */
+  height: 280px; /* Set the height to 280px */
+  grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
+  grid-template-rows: repeat(5, 1fr); 
 }
+
 .red2 {
-  width: 100px; 
-  height: 100px; 
-  background-color: red; 
-} 
-.green2 { 
-  width: 100px; 
-  height: 100px; 
-  background-color: green; 
-} 
+  background-color: red;
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+
+.green2 {
+  background-color: green;
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+}
+
 .yellow2 {
-  width: 100px; 
-  height: 100px; 
-  background-color: gold; 
-} 
+  background-color: gold;
+  grid-column: 3 / 5;
+  grid-row: 3 / 5;
+}
+
 .blue2 {
-  width: 100px; 
-  height: 100px; 
-  background-color: blue; 
-} 
+  background-color: blue;
+  grid-column: 4 / 6;
+  grid-row: 4 / 6;
+}
+
 /* Activity 3 styles */ 
 .content3 {
   /* This is the parent of the activity 3 boxes. */
+  display: grid;
+  width: 100%;
+  height: 600px; 
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr auto; 
 }
+
 .red3 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%;
+  height: 100%;
   background-color: red; 
-} 
+  grid-column: 1 / 3; 
+  grid-row: 1 / 2;    
+}
+
 .green3 {
-  width: 100px; 
-  height: 100px; 
-  background-color: green;
-} 
+  background-color: green; 
+  grid-column: 1 / 2; 
+  grid-row: 2 / 4;    
+  justify-self: start; 
+  width: 90%;
+  height: 100%;
+}
+
 .yellow3 {
-  width: 100px; 
-  height: 100px; 
   background-color: gold; 
-} 
+  grid-column: 2 / 3; /* Second column */
+  grid-row: 2 / 4;    /* Second row */
+  justify-self: end; /* Align to the right within its grid cell */
+  width: 90%;
+  height: 100%;
+}
+
 .blue3 {
-  width: 100px;
-  height: 100px; 
+  width: 100%; 
+  height: 100%; 
   background-color: blue; 
-} 
+  grid-column: 1 / 3; 
+  grid-row: 4 / 5;    
+}
+
+
 /* Activity 4 styles */ 
 .content4 {
   /* This is the parent of the activity 4 boxes. */
+  display: grid;
+  width: 100%;
   height: 400px;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: repeat(3, 1fr) auto; 
 }
 .red4 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%; 
   background-color: red; 
+  grid-column: 1/2; 
+  grid-row: 1/ 4; 
 } 
 .green4 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%;  
   background-color: green; 
+  grid-column: 2 / 3; 
+  grid-row: 1/ 2; 
 } 
 .yellow4 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%; 
   background-color: gold; 
+  grid-column: 2 / 3; 
+  grid-row: 2/ 3; 
 } 
 .blue4 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%;  
   background-color: blue; 
+
 } 
 /* Activity 5 styles */ 
 .content5 {
-  /* This is the parent of the activity 5 boxes. */
-  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
 }
-.red5 { 
-  width: 100px; 
-  height: 100px; 
-  background-color: red; 
-} 
-.green5 { 
-  width: 100px; 
-  height: 100px; 
-  background-color: green; 
 
-} 
+.red5 {
+  grid-column: 1 / 5;
+  grid-row: 1 / 2;
+  background-color: red;
+  
+}
+
+.green5 {
+  float: left;
+  height: 80%;
+  background-color: green;
+  grid-column: 1/ 2;
+  grid-row: 2 / 3;
+  z-index: 1;
+  }
+
 .yellow5 {
-  width: 100px; 
-  height: 100px; 
-  background-color: gold; 
+  grid-column: 1/ 5;
+  grid-row: 2 / 3;
+  background-color: gold;
+}
 
-} 
+
 .blue5 {
-  width: 100px; 
-  height: 100px; 
-  background-color: blue; 
-} 
+  grid-column: 1 / 5;
+  grid-row: 3 / 4;
+  background-color: blue;
+}
+
 /* Activity 6 styles */ 
 .content6 {
   /* This is the parent of the activity 6 boxes. */
+  display: grid;
+  width: 606px;
+  height: 610px; 
+  grid-template-columns: repeat(6, 1fr); 
+  grid-template-rows: repeat(6, 1fr); 
 }
 .red6 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%; 
   background-color: red; 
+  grid-column: 1 / 5; 
+  grid-row: 1/ 3;
 } 
 .green6 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%;
   background-color: green; 
+  grid-column: 1/3; 
+  grid-row: 5/7;  
+  z-index: 1;
 } 
 .yellow6 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%; 
   background-color: gold; 
+  grid-column: 5 / 7; 
+  grid-row: 3/ 7; 
+  z-index: 1;
 } 
 .blue6 {
-  width: 100px; 
-  height: 100px; 
+  width: 100%; 
+  height: 100%;  
   background-color: blue; 
+  grid-column: 2/6; 
+  grid-row: 2/6; 
 } 
 
 
