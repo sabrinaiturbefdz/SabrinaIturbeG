@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  .image-container {
+    margin-top: 20px;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #image-info {
+    margin-top: 20px;
+  }
+  
+  #file-size {
+    font-weight: bold;
+  }
+  
