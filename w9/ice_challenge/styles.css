@@ -1,0 +1,93 @@
+/* Remove body margin */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  max-width: 300px; /* Adjust as needed for your design */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.image-container img {
+  width: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.content {
+  text-align: center;
+}
+
+.content p {
+  font-size: 0.9em;
+ color:#8b808b;
+}
+
+.content h2 {
+  font-size: 2em;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.content h4{
+  color:#2d3c63;
+  }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  background-color: #2d3c63;
+  color: white;
+  padding: 10px 0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  text-align: center; 
+  gap: 10px;
+  
+}
+
+.stats > * {
+  border-right: 1px solid rgb(255, 255, 255); /* Add top border to each grid item */
+}
+
+
+.stats span {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em; 
+  padding: 0 0px; 
+  word-wrap: break-word;
+  overflow: hidden; 
+  text-align: center;
+}
+
+.stats .read {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats .read .read-time {
+  display: flex;
+  flex-direction: row; 
+  align-items: baseline;
+}
+
+.stats sup,
+.stats sub {
+  font-size: 0.6em;
+  vertical-align: middle;
+}
