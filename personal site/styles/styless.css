@@ -27,13 +27,22 @@ body {
 }
 .grid-item {
     padding: 20px;
-    border: 1px solid #ccc;
+    border: none;
+    align-items: center;
+    
+}
+.grid-item > h2,
+.grid-item > p {
+  border:none;
+  
 }
 .grid-item img {
     max-width: 100%; /* Ensure images don't exceed their container */
     height: auto; /* Maintain aspect ratio */
     display: block; /* Remove extra space underneath images */
     margin: 0 auto; /* Center images horizontally */
+    border: 8px solid var(--primary-color);
+    margin-top: 100px;
 }
 
 h2 {
@@ -48,44 +57,38 @@ h2 {
 }
 
 header {
-    background-color: var(--footer-background);
+  background-color: var(--footer-background);
   color: var(--white-color); /* Changed to use white color variable */
   font-family: 'Arial', 'Helvetica', sans-serif;
   display: grid;
-  grid-template-columns: 150px auto;
+  grid-template-columns: 10% 50% 40%;
 }
 
-/* #logo_link {
-  padding-top: 5px;
-  justify-self: center;
-  align-self: center;
-} */
-
-
-
-.logo-container {
-    width: 100px; 
-    height: 100px; 
-    border-radius: 10%; /* Make logo container round */
-    overflow: hidden;
-   
+#logo-container {
+    border-radius: 10%;
 }
 
 .logo {
-    width: 100%; /* Make sure the logo fills the container */
+    width: 100%; 
     height: auto;
-    border-radius: 60%; /* Make the logo itself round */
+    border-radius: 80%; 
 }
 
 .logo-container, h1{
-    color: var(--accent2-color);
-    text-align: right;
-   
+  color: var(--accent2-color);
+  padding: 20px;
+    text-align: right; 
+    margin: 0; 
+    display: flex;
+    align-items: center; 
+    justify-content: right;
+    font-size: 1.8em;
 }
 
 nav {
   display: flex;
-  /* justify-content: space-around; */
+  font-size: 0.9em;
+  align-items: center; 
 }
 
 nav a {
