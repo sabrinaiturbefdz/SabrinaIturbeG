@@ -5,49 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News 48 hours</title>
-    <link rel="stylesheet" href="styles/styless.css">
+    <link rel="stylesheet" href="styles/48hrstyles.css">
 </head>
 <body>
     <header>
-        <a id="logo-container" href="index.html">
+        <div class="logo-container">
             <img class="logo" src="images/logo.png" alt="Dry Oar Logo">
-        </a>
+        </div>
         <nav>
             <a href="index.html">Home</a>
             <a href="news48hrs.html">News: 48 hrs</a>
             <a href="developmenthub.html">Development Hub</a>
             <a href="site-plan.html">Site Plan</a>
         </nav>
-        <h1>Next-Gen Cybersecurity: Stay-ahead</h1>
+        <h1>Next-Gen Cybersecurity: Stay Ahead</h1>
     </header>
 
-    <div id="content">
-        <div class="grid-item">
-            <h3>In-Depth Analysis</h3>
-            <p>Delve deeper into cybersecurity issues with our in-depth analysis and expert commentary. Explore topics such as the rise of supply chain attacks and the integration of artificial intelligence in cybersecurity defenses. Gain valuable insights and actionable strategies to strengthen your organization's security posture and mitigate evolving risks.</p>
-        </div>
-        <div class="grid-item">
-            <img src="images/soc.jpg" alt="Image 1">
-        </div>
-        <div class="grid-item">
-            <h3>Breaking News</h3>
-            <p>In recent cybersecurity developments, a new strain of ransomware dubbed "CryptoClaw" has emerged, targeting financial institutions worldwide. Security experts are warning organizations to bolster their defenses as this sophisticated malware poses a significant threat to sensitive financial data. CryptoClaw utilizes advanced encryption techniques to lock down systems, demanding hefty ransom payments for decryption keys. Organizations are advised to enhance their cybersecurity protocols, including regular software updates, robust backup solutions, and employee training to mitigate the risks posed by evolving ransomware threats like CryptoClaw.</p>
-        </div>
-        <div class="grid-item">
-            <img src="images/computer.jpg" alt="Image 2">
-        </div>
-        <div class="grid-item">
-            <h3>Regulatory Updates</h3>
-            <p>Keep abreast of regulatory changes affecting cybersecurity practices globally. Stay informed about the latest directives, guidelines, and compliance requirements, such as the EU's new cybersecurity directive and the US government's updated ransomware response guidelines. Ensure your organization remains compliant and prepared in the face of regulatory challenges. Our commitment is to provide you with timely, accurate, and relevant information that empowers you to navigate today's cybersecurity challenges effectively. Join us in staying informed and proactive as we explore the forefront of cybersecurity innovation and regulation.</p>
-        </div>
-        <div class="grid-item">
-            <img src="images/computer_dark.jpg" alt="Image 3">
-        </div>
-    </div>
+    <main>
+        <section class="column left-column">
+            <div class="text-header">In-Depth Analysis</div>
+            <div class="text-body">
+                <p>Delve deeper into cybersecurity issues with our in-depth analysis and expert commentary. Our comprehensive exploration covers a wide range of pressing topics, including the rise of supply chain attacks and the integration of artificial intelligence in cybersecurity defenses.
+
+                    Supply chain attacks have become increasingly prevalent, posing significant threats to organizations as attackers exploit vulnerabilities in third-party vendors and suppliers. Our expert analysis provides detailed case studies and real-world examples, highlighting the methods used by cybercriminals and the potential impact on businesses. We offer strategic recommendations on how to identify and address these vulnerabilities, ensuring your organization remains resilient against such sophisticated threats. </p>
+                
+                   <p>Gain valuable insights and actionable strategies to strengthen your organization's security posture and mitigate evolving risks.</p>
+            </div>
+            <div class="image-placeholder">
+                <img src="images/soc.jpg" alt="Image 1">
+            </div>
+        </section>
+        
+        <section class="column center-column">
+            <div class="news-header">48 Hours</div>
+            <div class="news-body">
+                <div class="news-section">
+                    <h2>New Ransomware Threat: CryptoClaw</h2>
+                    <p>In recent cybersecurity developments, a new strain of ransomware dubbed "CryptoClaw" has emerged, targeting financial institutions worldwide. Security experts are warning organizations to bolster their defenses as this sophisticated malware poses a significant threat to sensitive financial data. CryptoClaw utilizes advanced encryption techniques to lock down systems, demanding hefty ransom payments for decryption keys. Organizations are advised to enhance their cybersecurity protocols, including regular software updates, robust backup solutions, and employee training to mitigate the risks posed by evolving ransomware threats like CryptoClaw.</p>
+                </div>
+                
+                <div class="news-section">
+                    <h2>Breakthrough in Quantum Cryptography</h2>
+                    <p>Researchers have achieved a significant breakthrough in quantum cryptography, demonstrating the ability to secure communications using quantum entanglement over long distances. This technology promises ultra-secure encryption methods that could revolutionize cybersecurity in the future.</p>
+                </div>
+                
+                <div class="news-section">
+                    <h2>5G Network Vulnerabilities</h2>
+                    <p>As 5G networks continue to roll out globally, researchers have identified new vulnerabilities that could potentially be exploited by malicious actors. These vulnerabilities range from flaws in network protocols to weaknesses in hardware components, highlighting ongoing challenges in securing next-generation telecommunications infrastructure.</p>
+                </div>
+            </div>
+        </section>
+        
+
+        <section class="column right-column">
+            <div class="text-header">Regulatory Updates</div>
+            <div class="text-body">
+                <p>Keep abreast of regulatory changes affecting cybersecurity practices globally. Stay informed about the latest directives, guidelines, and compliance requirements, such as the EU's new cybersecurity directive and the US government's updated ransomware response guidelines. Ensure your organization remains compliant and prepared in the face of regulatory challenges. Our commitment is to provide you with timely, accurate, and relevant information that empowers you to navigate today's cybersecurity challenges effectively. Join us in staying informed and proactive as we explore the forefront of cybersecurity innovation and regulation. </p>
+                <p>Join us in staying informed and proactive as we explore the forefront of cybersecurity innovation and regulation. Our resources include regular updates, in-depth articles, and expert webinars designed to keep you ahead of the curve. By engaging with our content, you will gain valuable insights into emerging trends, best practices, and actionable strategies to fortify your cybersecurity defenses. </p>
+            </div>
+            <div class="image-placeholder">
+                <img src="images/computer.jpg" alt="Image 2">
+            </div>
+        </section>
+    </main>
 
     <footer>
         <p>Next-Gen © 2024 - Sabrina Iturbe Garcia</p>
-        <p><a href="site-plan.html">Site Plan</a></p>
         <p><a href="contactus.html">Contact Us</a></p>
         <div class="social">
             <a href="https://facebook.com" target="_blank">
@@ -61,7 +84,5 @@
             </a>
         </div>
     </footer>
-
-   
 </body>
 </html>
