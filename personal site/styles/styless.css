@@ -192,21 +192,21 @@ footer {
     justify-content: space-between;
     padding: 1rem 1rem;
     background-color: var(--footer-background);
-    color: var(--white-color);
-}
-
-.footer-left, .footer-right {
+    color: var(--text-color);
+  }
+  
+  .footer-left, .footer-right {
     font-size: 0.875rem;
-}
-
-.footer-right a {
-    color: var(--white-color);
+  }
+  
+  .footer-right a {
+    color: var(--text-color);
     text-decoration: none;
-}
-
-.footer-right a:hover {
+  }
+  
+  .footer-right a:hover {
     text-decoration: underline;
-}
+  }
 
 /* Media queries for responsiveness */
 @media screen and (max-width: 1200px) {

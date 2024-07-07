@@ -176,7 +176,7 @@ footer {
   justify-content: space-between;
   padding: 1rem 1rem;
   background-color: var(--footer-background);
-  color: var(--white-color);
+  color: var(--text-color);
 }
 
 .footer-left, .footer-right {
@@ -184,7 +184,7 @@ footer {
 }
 
 .footer-right a {
-  color: var(--white-color);
+  color: var(--text-color);
   text-decoration: none;
 }
 
