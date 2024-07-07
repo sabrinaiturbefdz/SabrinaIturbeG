@@ -59,13 +59,13 @@ nav {
 }
 
 nav a {
-    color: var(--header--text);
+    color: var(--text-color);
     text-decoration: none;
     padding: 0.75rem 1.5rem;
     font-family: 'Verdana', 'Geneva', sans-serif;
     transition: background-color 0.3s, color 0.3s;
 }
-
+  
 nav a:hover {
     background-color: var(--accent2-color);
     color: var(--text-color);
@@ -88,12 +88,16 @@ main {
 .title-main {
     font-size: .8em;
     text-align: center;
+    letter-spacing: 0.05em; /* Adjust letter spacing for better readability */
+    line-height: 1.5em; /* Adjust line height for better readability */
 }
 
 .title-sub {
     font-size: 2.625rem;
     margin-bottom: 1rem;
     font-family: 'Dancing Script', Arial, sans-serif;
+    letter-spacing: 0.05em; /* Adjust letter spacing for better readability */
+    line-height: 1.5em; /* Adjust line height for better readability */
 }
 
 .grid-container {
@@ -106,7 +110,6 @@ main {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    
     justify-content: center;
 }
 
@@ -122,17 +125,19 @@ main {
 .grid-item-title {
     grid-column: 1 / -1; /* Span across all columns */
     font-size: 4em;
-    
+    letter-spacing: 0.05em; /* Adjust letter spacing for better readability */
+    line-height: 1.5em; /* Adjust line height for better readability */
 }
 
 .grid-item-1 {
     grid-column: 1; /* Column 1 */
     grid-row: 2; /* Row 2 */
-  
 }
 
-.grid-item-1 p{
-  text-align:justify;
+.grid-item-1 p {
+    text-align: left;
+    letter-spacing: 0.05em; /* Adjust letter spacing for better readability */
+    line-height: 1.5em; /* Adjust line height for better readability */
 }
 
 .grid-item-2 {
@@ -145,8 +150,10 @@ main {
     grid-row: 2; /* Row 2 */
 }
 
-.grid-item-3 p{
-  text-align:justify;
+.grid-item-3 p {
+    text-align: left;
+    letter-spacing: 0.05em; /* Adjust letter spacing for better readability */
+    line-height: 1.5em; /* Adjust line height for better readability */
 }
 
 .grid-item-4 {
@@ -157,48 +164,49 @@ main {
 .grid-item-5 {
     grid-column: 2; /* Column 2 */
     grid-row: 3; /* Row 3 */
-   
 }
-.grid-item-5 p{
-  text-align:justify;
+
+.grid-item-5 p {
+    text-align: left;
+    letter-spacing: 0.05em; /* Adjust letter spacing for better readability */
+    line-height: 1.5em; /* Adjust line height for better readability */
 }
 
 .grid-item-6 {
     grid-column: 3; /* Column 3 */
     grid-row: 3; /* Row 3 */
-
-    
 }
 
 .grid-item-title {
-  grid-column: 1 / -1; /* Span across all columns */
-  font-size: 3vw; /* Responsive font size based on viewport width */
-  display: block;
-  text-align: center;
+    grid-column: 1 / -1; /* Span across all columns */
+    font-size: 3vw; /* Responsive font size based on viewport width */
+    display: block;
+    text-align: center;
+    letter-spacing: 0.05em; /* Adjust letter spacing for better readability */
+    line-height: 1.5em; /* Adjust line height for better readability */
 }
 
 /* Footer */
 footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 1rem;
-  background-color: var(--footer-background);
-  color: var(--white-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    background-color: var(--footer-background);
+    color: var(--white-color);
 }
 
 .footer-left, .footer-right {
-  font-size: 0.875rem;
+    font-size: 0.875rem;
 }
 
 .footer-right a {
-  color: var(--white-color);
-  text-decoration: none;
+    color: var(--white-color);
+    text-decoration: none;
 }
 
 .footer-right a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
-
 
 /* Media queries for responsiveness */
 @media screen and (max-width: 1200px) {
