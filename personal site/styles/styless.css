@@ -193,20 +193,29 @@ footer {
     padding: 1rem 1rem;
     background-color: var(--footer-background);
     color: var(--text-color);
-  }
+}
   
-  .footer-left, .footer-right {
+.footer-left, .footer-right {
     font-size: 0.875rem;
-  }
+}
   
-  .footer-right a {
+.footer-right a {
     color: var(--text-color);
     text-decoration: none;
-  }
+}
   
-  .footer-right a:hover {
+.footer-right a:hover {
     text-decoration: underline;
-  }
+}
+
+/* Specific style for "Contact Us" link */
+footer a[href="contactus.html"] {
+    color: #000000; /* Change color to black */
+}
+  
+footer a[href="contactus.html"]:hover {
+    color: #000000; /* Ensure hover color remains black */
+}
 
 /* Media queries for responsiveness */
 @media screen and (max-width: 1200px) {

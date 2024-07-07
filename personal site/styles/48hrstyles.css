@@ -151,25 +151,26 @@ footer {
     padding: 1rem 1rem;
     background-color: var(--footer-background);
     color: var(--text-color);
-    flex-wrap: wrap; /* Ensures footer content wraps on smaller screens */
-    align-items: center; /* Vertically center align the content */
 }
-
-footer p {
+  
+.footer-left, .footer-right {
     font-size: 0.875rem;
-    margin: 0.5rem 0;
+}
+  
+.footer-right a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+  
+.footer-right a:hover {
+    text-decoration: underline;
 }
 
-footer .social {
-    display: flex;
-    align-items: center;
+/* Specific style for "Contact Us" link */
+footer a[href="contactus.html"] {
+    color: #000000; /* Change color to black */
 }
-
-footer .social a {
-    margin: 0 0.5rem;
-}
-
-footer .social img {
-    width: 24px;
-    height: 24px;
+  
+footer a[href="contactus.html"]:hover {
+    color: #000000; /* Ensure hover color remains black */
 }

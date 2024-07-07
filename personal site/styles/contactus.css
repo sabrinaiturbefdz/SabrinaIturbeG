@@ -109,6 +109,15 @@ footer {
   text-decoration: underline;
 }
 
+/* Specific style for "Contact Us" link */
+footer a[href="contactus.html"] {
+  color: #000000; /* Change color to black */
+}
+
+footer a[href="contactus.html"]:hover {
+  color: #000000; /* Ensure hover color remains black */
+}
+
 @media screen and (max-width: 900px) {
   nav, footer {
     flex-direction: column;
