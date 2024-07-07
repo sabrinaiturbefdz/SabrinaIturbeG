@@ -11,7 +11,11 @@
   --text-color: #000000;  /* Default text color */
   --footer-background: #468c97;  /* Footer background color */
   --white-color: #FFFFFF; /* White color for text or elements */
-  --header--text: #bbd01c;
+  --header-text: #002d8f; /* Header text color */
+
+  /* Font family declarations */
+  --font-family-heading: 'Dancing Script', Arial, sans-serif;
+  --font-family-body: 'Roboto', Arial, sans-serif;
 }
 
 * {
@@ -21,8 +25,8 @@
 }
 
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    color: #333;
+    font-family: var(--font-family-body);
+    color: var(--text-color);
     background-color: var(--background-color);
     min-height: 100vh; 
     display: flex;
@@ -37,6 +41,7 @@ header {
     color: var(--white-color);
     padding: 1rem 2rem;
     font-size: 1.5em;
+    font-family: var(--font-family-heading); /* Apply heading font family */
 }
 
 .logo-container {
@@ -74,8 +79,8 @@ nav a:hover {
 
 h1 {
     font-size: 3rem;
-    color: var(--text-color);
-    font-family: 'Dancing Script', Arial, sans-serif;
+    color: var(--header-text); /* Use header text color variable */
+    font-family: var(--font-family-heading); /* Apply heading font family */
     margin-left: auto; /* Align h1 to the right */
 }
 
@@ -94,14 +99,13 @@ footer {
     padding: 1rem 1rem;
     background-color: var(--footer-background);
     color: var(--text-color);
-    font-size: 2em;
+    font-size: 1.5em;
+    font-family: var(--font-family-body); /* Apply body font family */
 }
 
-  
 .footer-right a {
     color: var(--text-color);
     text-decoration: none;
-  
 }
   
 .footer-right a:hover {
