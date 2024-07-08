@@ -1,4 +1,12 @@
-* {
+:root {
+    --primary-color: #D1DBE4;
+    --secondary-color: #A3B7CA;
+    --accent-color: #7593AF;
+    --accent2-color: #476F95;
+    --text-color: #194A7A;
+  }
+  
+  * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -7,25 +15,25 @@
   /* General body styles */
   body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    color: #4beed3;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     text-align: center;
   }
   
   /* Header styles */
   header {
-    background-color: #e49c18;
+    background-color: var(--secondary-color);
     color: white;
     padding: 1rem 0;
   }
   
   header h1 {
     font-size: 2.5rem;
-    color: #ff6347;
+    color: var(--accent-color);
     margin: 0;
   }
   
-  /* Position the image container (needed to position the left and right arrows) */
+  /* Position the image container */
   .container {
     position: relative;
     display: flex;
@@ -33,7 +41,7 @@
     align-items: center;
     flex-direction: column;
     width: 80%;
-    margin: 2rem auto; /* Center the container horizontally */
+    margin: 2rem auto;
     background-color: white;
     padding: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -77,7 +85,7 @@
     right: 0;
   }
   
-  /* On hover, add a black background color with a little bit see-through */
+  /* On hover, add a black background color with transparency */
   .prev:hover,
   .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
@@ -96,7 +104,7 @@
   /* Container for image text */
   .caption-container {
     text-align: center;
-    background-color: #e45218;
+    background-color: var(--secondary-color);
     padding: 2px 16px;
     color: white;
     width: 100%;
@@ -126,12 +134,12 @@
   .active,
   .demo:hover {
     opacity: 1;
-    border: 2px solid #ff6347;
+    border: 2px solid var(--accent-color);
   }
   
   /* Footer styles */
   footer {
-    background-color: #e49c18;
+    background-color: var(--secondary-color);
     color: white;
     padding: 1rem 0;
     margin-top: 2rem;
