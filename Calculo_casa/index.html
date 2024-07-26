@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Hipotecas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <h2>Calculadora de Hipotecas</h2>
+    <form id="mortgageForm">
+        <label for="homePrice">Precio de la Casa:</label>
+        <input type="text" id="homePrice" name="homePrice" oninput="formatNumberInput(this)"><br>
+        <label for="downPayment">Pago Inicial (Down Payment):</label>
+        <input type="text" id="downPayment" name="downPayment" oninput="formatNumberInput(this)"><br>
+        <label for="annualInterestRate">Tasa de Interés Anual (%):</label>
+        <input type="number" id="annualInterestRate" name="annualInterestRate" step="0.01"><br>
+        <label for="years">Plazo del Préstamo (años):</label>
+        <select id="years" name="years">
+            <option value="30">30 años</option>
+            <option value="15">15 años</option>
+        </select><br>
+        <button type="button" id="calculateButton">Calcular</button>
+    </form>
+    <div id="results">
+        <p id="monthlyPayment"></p>
+        <p id="totalPayment"></p>
+        <p id="totalInterestPaid"></p>
+        <p id="closingCosts"></p>
+        <p id="pmiCost"></p>
+        <p id="downPaymentPercentage"></p>
+        <p>Nota: Al cálculo final, recuerde agregar:</p>
+        <ul>
+            <li>Impuestos de propiedad (estimado anual): $2,200 </li>
+            <li>Seguro del hogar (estimado anual): $900 </li>
+            <li>Facturas mensuales (estimado): $300</li>
+            <li>----------------------</li>
+            <p id="totalAnnualIncludingPMI"></p>
+            <p id="totalMonthlyIncludingPMI"></p>
+        </ul>
+    </div>
+    <table id="amortizationSchedule"></table>
+</body>
+</html>
