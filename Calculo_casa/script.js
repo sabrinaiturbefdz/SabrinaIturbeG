@@ -19,13 +19,6 @@ function calculateMortgage() {
     var years = parseInt(document.getElementById('years').value);
     var numberOfPayments = years * 12;
 
-    // Add these console logs for debugging
-    console.log("Home Price:", homePrice);
-    console.log("Down Payment:", downPayment);
-    console.log("Annual Interest Rate:", annualInterestRate);
-    console.log("Years:", years);
-    console.log("Number of Payments:", numberOfPayments);
-
     var principal = homePrice - downPayment;
     var closingCosts = 6000; // Approximately $6000
     var pmi = 0;
@@ -100,7 +93,7 @@ function displayAmortizationSchedule(schedule) {
     });
 }
 
-// Add event listeners to format inputs on blur
+// Add event listeners to format inputs on blur and calculate on button click
 document.getElementById('homePrice').addEventListener('blur', function () { formatNumberInput(this); });
 document.getElementById('downPayment').addEventListener('blur', function () { formatNumberInput(this); });
 document.getElementById('annualInterestRate').addEventListener('blur', function () { formatNumberInput(this); });
