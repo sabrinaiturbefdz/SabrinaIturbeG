@@ -88,7 +88,6 @@ section p {
     font-size: 1.1rem;
 }
 
-.report-section input[type="text"],
 .report-section textarea,
 .report-section input[type="file"] {
     width: 100%;
