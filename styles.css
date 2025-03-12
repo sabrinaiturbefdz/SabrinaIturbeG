@@ -1,0 +1,153 @@
+/* Winter-inspired color palette */
+:root {
+    --primary-blue: #2A5D9E; /* Cool blue for headers/buttons */
+    --light-blue: #A3C9E2; /* Soft blue for accents */
+    --white: #F9FAFB; /* Crisp white for backgrounds */
+    --gray: #D1D5DB; /* Light gray for text */
+    --dark-gray: #4B5563; /* Darker gray for footer */
+}
+
+/* General styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Section styling */
+section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: var(--light-blue);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: var(--primary-blue);
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+section p {
+    margin: 0.5rem 0;
+}
+
+/* Intro section */
+.intro-section {
+    background-color: var(--white);
+}
+
+/* Map section */
+.map-section #map {
+    height: 500px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+/* Report section */
+.report-section form {
+    margin-top: 1rem;
+}
+
+.report-section label {
+    display: block;
+    margin: 1rem 0 0.5rem;
+    font-weight: bold;
+}
+
+.report-section textarea,
+.report-section input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.report-section button {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.report-section button:hover {
+    background-color: #1E4A7A; /* Darker blue on hover */
+}
+
+/* Info window styling */
+.info-window {
+    max-width: 250px;
+}
+
+.info-window p {
+    margin: 0 0 0.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--gray);
+    color: var(--dark-gray);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+    }
+
+    .map-section #map {
+        height: 400px;
+    }
+}
