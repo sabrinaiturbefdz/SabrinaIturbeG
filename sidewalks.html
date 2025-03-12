@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rexburg Sidewalks During Winter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Rexburg Sidewalks During Winter</h1>
+        <p>Keeping our community safe, one report at a time.</p>
+    </header>
+
+    <main>
+        <section class="intro-section">
+            <h2>Welcome to Rexburg Sidewalk Reports</h2>
+            <p>
+                Winter in Rexburg can make sidewalks slippery and dangerous. This website allows residents to report icy or poorly maintained sidewalks by uploading a photo and description. Your reports will appear on a live map, helping everyone stay informed and safe. Together, we can make our community better prepared for winter!
+            </p>
+        </section>
+
+        <section class="map-section">
+            <h2>Live Sidewalk Reports</h2>
+            <p>Check the map below to see current sidewalk conditions reported by your neighbors.</p>
+            <div id="map"></div>
+        </section>
+
+        <section class="report-section">
+            <h2>Report a Sidewalk Issue</h2>
+            <p>Spotted a slippery sidewalk? Submit a report to help keep Rexburg safe!</p>
+            <form id="sidewalk-report">
+                <label for="description">Description of Issue:</label>
+                <textarea id="description" name="description" rows="4" placeholder="e.g., Icy patch near Main St." required></textarea>
+
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+
+                <button type="submit">Submit Report</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Rexburg Community. Stay safe this winter!</p>
+    </footer>
+
+    <!-- Google Maps API Script -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+    <script>
+        let map;
+        let reports = [];
+
+        // Initialize the map centered on Rexburg, Idaho
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 43.8260, lng: -111.7897 }, // Rexburg coordinates
+                zoom: 14
+            });
+        }
+
+        // Handle form submission
+        document.getElementById("sidewalk-report").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const description = document.getElementById("description").value;
+            const imageFile = document.getElementById("image").files[0];
+
+            // For simplicity, use a fixed location near Rexburg; in a real app, you'd geocode the description
+            const report = {
+                lat: 43.8260 + (Math.random() - 0.5) * 0.01, // Random offset for demo
+                lng: -111.7897 + (Math.random() - 0.5) * 0.01,
+                description: description,
+                image: URL.createObjectURL(imageFile) // Temporary URL for the uploaded image
+            };
+
+            reports.push(report);
+            addMarker(report);
+
+            // Reset form
+            this.reset();
+        });
+
+        // Add a marker to the map
+        function addMarker(report) {
+            const marker = new google.maps.Marker({
+                position: { lat: report.lat, lng: report.lng },
+                map: map,
+                title: "Sidewalk Issue"
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div class="info-window">
+                        <p>${report.description}</p>
+                        <img src="${report.image}" alt="Sidewalk issue" style="max-width: 200px;">
+                    </div>
+                `
+            });
+
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+            });
+        }
+    </script>
+</body>
+</html>
