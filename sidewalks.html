@@ -16,13 +16,13 @@
         <section class="intro-section">
             <h2>Welcome to Rexburg Sidewalk Reports</h2>
             <p>
-                Winter in Rexburg can make sidewalks slippery and dangerous. This website allows residents to report icy or poorly maintained sidewalks by uploading a photo and description. Your reports will appear on a live map, helping everyone stay informed and safe. Together, we can make our community better prepared for winter!
+                Winter in Rexburg can make sidewalks slippery and dangerous. Report icy or poorly maintained sidewalks with a photo and description. View live updates on the map below—red markers indicate hazards, green markers show resolved issues. Help keep our community safe by reporting and resolving issues!
             </p>
         </section>
 
         <section class="map-section">
             <h2>Live Sidewalk Reports</h2>
-            <p>Check the map below to see current sidewalk conditions reported by your neighbors.</p>
+            <p>Check the map below for current sidewalk conditions. Red = Hazardous, Green = Resolved.</p>
             <div id="map"></div>
         </section>
 
@@ -49,7 +49,8 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
     <script>
         let map;
-        let reports = [];
+        let reports = []; // Array to store all reports
+        let markers = []; // Array to store map markers for updating
 
         // Initialize the map centered on Rexburg, Idaho
         function initMap() {
@@ -57,21 +58,28 @@
                 center: { lat: 43.8260, lng: -111.7897 }, // Rexburg coordinates
                 zoom: 14
             });
+
+            // Load existing reports (in a real app, this would come from a server)
+            reports.forEach(report => addMarker(report));
         }
 
-        // Handle form submission
+        // Handle new report submission
         document.getElementById("sidewalk-report").addEventListener("submit", function(event) {
             event.preventDefault();
 
             const description = document.getElementById("description").value;
             const imageFile = document.getElementById("image").files[0];
 
-            // For simplicity, use a fixed location near Rexburg; in a real app, you'd geocode the description
+            // Simulate geolocation (in a real app, use geocoder or user input)
             const report = {
+                id: Date.now(), // Unique ID for each report
                 lat: 43.8260 + (Math.random() - 0.5) * 0.01, // Random offset for demo
                 lng: -111.7897 + (Math.random() - 0.5) * 0.01,
                 description: description,
-                image: URL.createObjectURL(imageFile) // Temporary URL for the uploaded image
+                hazardImage: URL.createObjectURL(imageFile), // Temporary URL for hazard image
+                status: "hazardous", // Initial status
+                resolvedImage: null, // Placeholder for resolved image
+                resolvedDate: null // Date resolved
             };
 
             reports.push(report);
@@ -81,26 +89,80 @@
             this.reset();
         });
 
-        // Add a marker to the map
+        // Add or update a marker on the map
         function addMarker(report) {
+            // Remove existing marker if updating
+            const existingMarker = markers.find(m => m.reportId === report.id);
+            if (existingMarker) {
+                existingMarker.setMap(null);
+                markers = markers.filter(m => m.reportId !== report.id);
+            }
+
             const marker = new google.maps.Marker({
                 position: { lat: report.lat, lng: report.lng },
                 map: map,
-                title: "Sidewalk Issue"
+                icon: report.status === "hazardous" 
+                    ? "http://maps.google.com/mapfiles/ms/icons/red-dot.png" // Red for hazardous
+                    : "http://maps.google.com/mapfiles/ms/icons/green-dot.png", // Green for resolved
+                title: report.status === "hazardous" ? "Hazardous" : "Resolved"
             });
+            marker.reportId = report.id; // Link marker to report
+            markers.push(marker);
 
             const infoWindow = new google.maps.InfoWindow({
-                content: `
-                    <div class="info-window">
-                        <p>${report.description}</p>
-                        <img src="${report.image}" alt="Sidewalk issue" style="max-width: 200px;">
-                    </div>
-                `
+                content: createInfoWindowContent(report)
             });
 
             marker.addListener("click", () => {
                 infoWindow.open(map, marker);
             });
+        }
+
+        // Create content for the info window
+        function createInfoWindowContent(report) {
+            let content = `
+                <div class="info-window">
+                    <p><strong>${report.description}</strong></p>
+                    <p>Status: ${report.status === "hazardous" ? "Hazardous" : "Resolved"}</p>
+                    <img src="${report.hazardImage}" alt="Hazard" style="max-width: 200px;">
+            `;
+
+            if (report.status === "resolved" && report.resolvedImage) {
+                content += `
+                    <p>Resolved on: ${report.resolvedDate}</p>
+                    <img src="${report.resolvedImage}" alt="Resolved" style="max-width: 200px;">
+                `;
+            } else {
+                content += `
+                    <form id="resolve-form-${report.id}" enctype="multipart/form-data">
+                        <label for="resolve-image-${report.id}">Upload Resolved Image:</label>
+                        <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
+                        <button type="submit">Mark as Resolved</button>
+                    </form>
+                `;
+            }
+
+            content += `</div>`;
+            setTimeout(() => attachResolveListener(report), 0); // Attach listener after DOM update
+            return content;
+        }
+
+        // Attach listener for resolving an incident
+        function attachResolveListener(report) {
+            const form = document.getElementById(`resolve-form-${report.id}`);
+            if (form) {
+                form.addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    const resolveImageFile = document.getElementById(`resolve-image-${report.id}`).files[0];
+                    
+                    report.status = "resolved";
+                    report.resolvedImage = URL.createObjectURL(resolveImageFile);
+                    report.resolvedDate = new Date().toLocaleDateString();
+
+                    // Update marker
+                    addMarker(report);
+                });
+            }
         }
     </script>
 </body>
