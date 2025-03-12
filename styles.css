@@ -5,7 +5,7 @@
     --white: #F9FAFB;
     --gray: #D1D5DB;
     --dark-gray: #4B5563;
-    --success-green: #28A745; /* For feedback */
+    --success-green: #28A745;
 }
 
 /* General styling */
@@ -88,6 +88,7 @@ section p {
     font-size: 1.1rem;
 }
 
+.report-section input[type="text"],
 .report-section textarea,
 .report-section input[type="file"] {
     width: 100%;
