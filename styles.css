@@ -25,10 +25,12 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-color: #ffcccc; /* Fallback: light red if image fails */
+    background-color: #ffcccc; /* Fallback color if image fails */
     position: relative;
+    display: flex;           /* Added to center content */
+    justify-content: center; /* Added to center content */
+    align-items: center;     /* Added to center content */
 }
-
 /* Switch to local image once confirmed working */
 /* .intro-section { */
 /*     background-image: url('background.jpg'); */
@@ -56,7 +58,6 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin: 0;
 }
-
 /* Content section layout */
 .content-section {
     display: flex;
