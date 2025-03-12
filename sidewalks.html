@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rexburg Sidewalks During Winter</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
     <header>
@@ -45,8 +47,8 @@
         <p>© 2025 Rexburg Community. Stay safe this winter!</p>
     </footer>
 
-    <!-- Google Maps API Script -->
-    <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         let map;
         let reports = []; // Array to store all reports
@@ -54,12 +56,14 @@
 
         // Initialize the map centered on Rexburg, Idaho
         function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: 43.8260, lng: -111.7897 }, // Rexburg coordinates
-                zoom: 14
-            });
+            map = L.map('map').setView([43.8260, -111.7897], 14); // Rexburg coordinates, zoom level 14
 
-            // Load existing reports (in a real app, this would come from a server)
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Load existing reports
             reports.forEach(report => addMarker(report));
         }
 
@@ -70,10 +74,10 @@
             const description = document.getElementById("description").value;
             const imageFile = document.getElementById("image").files[0];
 
-            // Simulate geolocation (in a real app, use geocoder or user input)
+            // Simulate geolocation (random offset for demo)
             const report = {
                 id: Date.now(), // Unique ID for each report
-                lat: 43.8260 + (Math.random() - 0.5) * 0.01, // Random offset for demo
+                lat: 43.8260 + (Math.random() - 0.5) * 0.01,
                 lng: -111.7897 + (Math.random() - 0.5) * 0.01,
                 description: description,
                 hazardImage: URL.createObjectURL(imageFile), // Temporary URL for hazard image
@@ -94,32 +98,30 @@
             // Remove existing marker if updating
             const existingMarker = markers.find(m => m.reportId === report.id);
             if (existingMarker) {
-                existingMarker.setMap(null);
+                map.removeLayer(existingMarker);
                 markers = markers.filter(m => m.reportId !== report.id);
             }
 
-            const marker = new google.maps.Marker({
-                position: { lat: report.lat, lng: report.lng },
-                map: map,
-                icon: report.status === "hazardous" 
-                    ? "http://maps.google.com/mapfiles/ms/icons/red-dot.png" // Red for hazardous
-                    : "http://maps.google.com/mapfiles/ms/icons/green-dot.png", // Green for resolved
-                title: report.status === "hazardous" ? "Hazardous" : "Resolved"
-            });
+            const markerColor = report.status === "hazardous" ? 'red' : 'green';
+            const marker = L.marker([report.lat, report.lng], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: `<span style="background-color: ${markerColor}; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>`,
+                    iconSize: [20, 20]
+                })
+            }).addTo(map);
             marker.reportId = report.id; // Link marker to report
             markers.push(marker);
 
-            const infoWindow = new google.maps.InfoWindow({
-                content: createInfoWindowContent(report)
-            });
+            const popupContent = createPopupContent(report);
+            marker.bindPopup(popupContent).openPopup();
 
-            marker.addListener("click", () => {
-                infoWindow.open(map, marker);
-            });
+            // Reattach resolve listener when popup is opened
+            marker.on('popupopen', () => attachResolveListener(report));
         }
 
-        // Create content for the info window
-        function createInfoWindowContent(report) {
+        // Create content for the popup
+        function createPopupContent(report) {
             let content = `
                 <div class="info-window">
                     <p><strong>${report.description}</strong></p>
@@ -143,7 +145,6 @@
             }
 
             content += `</div>`;
-            setTimeout(() => attachResolveListener(report), 0); // Attach listener after DOM update
             return content;
         }
 
@@ -164,6 +165,9 @@
                 });
             }
         }
+
+        // Initialize map on page load
+        window.onload = initMap;
     </script>
 </body>
 </html>
