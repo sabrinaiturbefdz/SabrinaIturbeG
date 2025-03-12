@@ -1,10 +1,11 @@
 /* Winter-inspired color palette */
 :root {
-    --primary-blue: #2A5D9E; /* Cool blue for headers/buttons */
-    --light-blue: #A3C9E2; /* Soft blue for accents */
-    --white: #F9FAFB; /* Crisp white for backgrounds */
-    --gray: #D1D5DB; /* Light gray for text */
-    --dark-gray: #4B5563; /* Darker gray for footer */
+    --primary-blue: #2A5D9E;
+    --light-blue: #A3C9E2;
+    --white: #F9FAFB;
+    --gray: #D1D5DB;
+    --dark-gray: #4B5563;
+    --success-green: #28A745; /* For feedback */
 }
 
 /* General styling */
@@ -53,7 +54,7 @@ section {
 section h2 {
     color: var(--primary-blue);
     margin-top: 0;
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 section p {
@@ -65,6 +66,65 @@ section p {
     background-color: var(--white);
 }
 
+/* Report section */
+.report-section {
+    background-color: var(--white);
+    border: 2px solid var(--primary-blue);
+}
+
+.report-section ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.report-section form {
+    margin-top: 1.5rem;
+}
+
+.report-section label {
+    display: block;
+    margin: 1rem 0 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.report-section textarea,
+.report-section input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.report-section .submit-btn {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 6px;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+}
+
+.report-section .submit-btn:hover {
+    background-color: #1E4A7A;
+}
+
+.report-section .feedback {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    color: var(--success-green);
+    font-weight: bold;
+}
+
+.report-section .hidden {
+    display: none;
+}
+
 /* Map section */
 .map-section #map {
     height: 500px;
@@ -72,41 +132,6 @@ section p {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 1rem;
-}
-
-/* Report section */
-.report-section form {
-    margin-top: 1rem;
-}
-
-.report-section label {
-    display: block;
-    margin: 1rem 0 0.5rem;
-    font-weight: bold;
-}
-
-.report-section textarea,
-.report-section input[type="file"] {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--gray);
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.report-section button {
-    background-color: var(--primary-blue);
-    color: var(--white);
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    margin-top: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.report-section button:hover {
-    background-color: #1E4A7A; /* Darker blue on hover */
 }
 
 /* Info window (popup) styling */
@@ -125,7 +150,7 @@ section p {
     margin-bottom: 0.5rem;
 }
 
-.info-window button {
+.info-window .resolve-btn {
     background-color: var(--primary-blue);
     color: var(--white);
     padding: 0.5rem 1rem;
@@ -135,7 +160,7 @@ section p {
     transition: background-color 0.3s;
 }
 
-.info-window button:hover {
+.info-window .resolve-btn:hover {
     background-color: #1E4A7A;
 }
 
@@ -180,5 +205,10 @@ footer {
 
     .map-section #map {
         height: 400px;
+    }
+
+    .report-section .submit-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
     }
 }
