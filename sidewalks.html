@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rexburg Sidewalks During Winter</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
@@ -18,28 +17,34 @@
         <section class="intro-section">
             <h2>Welcome to Rexburg Sidewalk Reports</h2>
             <p>
-                Winter in Rexburg can make sidewalks slippery and dangerous. Report icy or poorly maintained sidewalks with a photo and description. View live updates on the map below—red markers indicate hazards, green markers show resolved issues. Help keep our community safe by reporting and resolving issues!
+                Winter in Rexburg can make sidewalks slippery and dangerous. Use the form below to report icy or poorly maintained sidewalks with a photo and description. Check the map for live updates—red markers show hazards, green markers show resolved issues.
             </p>
-        </section>
-
-        <section class="map-section">
-            <h2>Live Sidewalk Reports</h2>
-            <p>Check the map below for current sidewalk conditions. Red = Hazardous, Green = Resolved.</p>
-            <div id="map"></div>
         </section>
 
         <section class="report-section">
             <h2>Report a Sidewalk Issue</h2>
-            <p>Spotted a slippery sidewalk? Submit a report to help keep Rexburg safe!</p>
+            <p>Help keep Rexburg safe! Follow these steps:</p>
+            <ol>
+                <li>Describe the issue (e.g., "Icy patch near Main St").</li>
+                <li>Upload a photo of the hazard.</li>
+                <li>Click "Submit Report" to add it to the map.</li>
+            </ol>
             <form id="sidewalk-report">
                 <label for="description">Description of Issue:</label>
-                <textarea id="description" name="description" rows="4" placeholder="e.g., Icy patch near Main St." required></textarea>
+                <textarea id="description" name="description" rows="4" placeholder="Describe the sidewalk issue here..." required></textarea>
 
-                <label for="image">Upload Image:</label>
+                <label for="image">Upload Hazard Photo:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
 
-                <button type="submit">Submit Report</button>
+                <button type="submit" class="submit-btn">Submit Report</button>
             </form>
+            <p id="report-feedback" class="feedback hidden">Report submitted successfully! Check the map.</p>
+        </section>
+
+        <section class="map-section">
+            <h2>Live Sidewalk Reports</h2>
+            <p>Red = Hazardous | Green = Resolved. Click markers for details or to mark resolved.</p>
+            <div id="map"></div>
         </section>
     </main>
 
@@ -47,55 +52,49 @@
         <p>© 2025 Rexburg Community. Stay safe this winter!</p>
     </footer>
 
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         let map;
-        let reports = []; // Array to store all reports
-        let markers = []; // Array to store map markers for updating
+        let reports = [];
+        let markers = [];
 
-        // Initialize the map centered on Rexburg, Idaho
         function initMap() {
-            map = L.map('map').setView([43.8260, -111.7897], 14); // Rexburg coordinates, zoom level 14
-
-            // Add OpenStreetMap tiles
+            map = L.map('map').setView([43.8260, -111.7897], 14);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
-
-            // Load existing reports
             reports.forEach(report => addMarker(report));
         }
 
-        // Handle new report submission
         document.getElementById("sidewalk-report").addEventListener("submit", function(event) {
             event.preventDefault();
 
             const description = document.getElementById("description").value;
             const imageFile = document.getElementById("image").files[0];
 
-            // Simulate geolocation (random offset for demo)
             const report = {
-                id: Date.now(), // Unique ID for each report
+                id: Date.now(),
                 lat: 43.8260 + (Math.random() - 0.5) * 0.01,
                 lng: -111.7897 + (Math.random() - 0.5) * 0.01,
                 description: description,
-                hazardImage: URL.createObjectURL(imageFile), // Temporary URL for hazard image
-                status: "hazardous", // Initial status
-                resolvedImage: null, // Placeholder for resolved image
-                resolvedDate: null // Date resolved
+                hazardImage: URL.createObjectURL(imageFile),
+                status: "hazardous",
+                resolvedImage: null,
+                resolvedDate: null
             };
 
             reports.push(report);
             addMarker(report);
 
-            // Reset form
+            // Show feedback
+            const feedback = document.getElementById("report-feedback");
+            feedback.classList.remove("hidden");
+            setTimeout(() => feedback.classList.add("hidden"), 3000); // Hide after 3 seconds
+
             this.reset();
         });
 
-        // Add or update a marker on the map
         function addMarker(report) {
-            // Remove existing marker if updating
             const existingMarker = markers.find(m => m.reportId === report.id);
             if (existingMarker) {
                 map.removeLayer(existingMarker);
@@ -110,17 +109,15 @@
                     iconSize: [20, 20]
                 })
             }).addTo(map);
-            marker.reportId = report.id; // Link marker to report
+            marker.reportId = report.id;
             markers.push(marker);
 
             const popupContent = createPopupContent(report);
-            marker.bindPopup(popupContent).openPopup();
+            marker.bindPopup(popupContent);
 
-            // Reattach resolve listener when popup is opened
             marker.on('popupopen', () => attachResolveListener(report));
         }
 
-        // Create content for the popup
         function createPopupContent(report) {
             let content = `
                 <div class="info-window">
@@ -137,9 +134,9 @@
             } else {
                 content += `
                     <form id="resolve-form-${report.id}" enctype="multipart/form-data">
-                        <label for="resolve-image-${report.id}">Upload Resolved Image:</label>
+                        <label for="resolve-image-${report.id}">Upload Resolved Photo:</label>
                         <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
-                        <button type="submit">Mark as Resolved</button>
+                        <button type="submit" class="resolve-btn">Mark as Resolved</button>
                     </form>
                 `;
             }
@@ -148,7 +145,6 @@
             return content;
         }
 
-        // Attach listener for resolving an incident
         function attachResolveListener(report) {
             const form = document.getElementById(`resolve-form-${report.id}`);
             if (form) {
@@ -160,13 +156,11 @@
                     report.resolvedImage = URL.createObjectURL(resolveImageFile);
                     report.resolvedDate = new Date().toLocaleDateString();
 
-                    // Update marker
                     addMarker(report);
                 });
             }
         }
 
-        // Initialize map on page load
         window.onload = initMap;
     </script>
 </body>
