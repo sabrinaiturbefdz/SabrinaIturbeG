@@ -109,7 +109,7 @@ section p {
     background-color: #1E4A7A; /* Darker blue on hover */
 }
 
-/*  info window styling */
+/* Info window (popup) styling */
 .info-window form {
     margin-top: 1rem;
 }
@@ -141,6 +141,12 @@ section p {
 
 .info-window p {
     margin: 0 0 0.5rem;
+}
+
+/* Custom marker styling for Leaflet */
+.custom-marker {
+    border: none !important;
+    background: none !important;
 }
 
 /* Footer */
