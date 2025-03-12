@@ -109,9 +109,34 @@ section p {
     background-color: #1E4A7A; /* Darker blue on hover */
 }
 
-/* Info window styling */
-.info-window {
-    max-width: 250px;
+/*  info window styling */
+.info-window form {
+    margin-top: 1rem;
+}
+
+.info-window label {
+    display: block;
+    margin: 0.5rem 0;
+    font-weight: bold;
+}
+
+.info-window input[type="file"] {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.info-window button {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.info-window button:hover {
+    background-color: #1E4A7A;
 }
 
 .info-window p {
