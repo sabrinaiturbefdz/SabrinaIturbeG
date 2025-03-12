@@ -21,11 +21,18 @@ body {
 /* Intro section with background image */
 .intro-section {
     height: 100vh;
-    background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
-    /* Fallback color to confirm CSS */
-    background-color: #ffcccc; /* Light red - should only show if image fails */
+    background-image: url('https://via.placeholder.com/1920x1080');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: #ffcccc; /* Fallback: light red if image fails */
     position: relative;
 }
+
+/* Switch to local image once confirmed working */
+/* .intro-section { */
+/*     background-image: url('background.jpg'); */
+/* } */
 
 .intro-overlay {
     width: 100%;
@@ -38,7 +45,7 @@ body {
 }
 
 .intro-section:hover .intro-overlay {
-    background: rgba(0, 0, 0, 0.4); /* Slightly darker, still transparent */
+    background: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 }
 
@@ -212,3 +219,5 @@ body {
 
     #map {
         height: 400px;
+    }
+}
