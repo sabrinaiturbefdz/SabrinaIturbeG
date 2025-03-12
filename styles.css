@@ -34,12 +34,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+    background: rgba(0, 0, 0, 0.2); /* Light transparent overlay */
     transition: background 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .intro-section:hover .intro-overlay {
-    background: rgba(0, 0, 0, 0.7); /* Darker on hover */
+    background: rgba(0, 0, 0, 0.4); /* Slightly darker on hover, still transparent */
+    cursor: pointer;
 }
 
 .intro-title {
@@ -54,7 +58,7 @@ body {
 /* Content section layout */
 .content-section {
     display: flex;
-    min-height: 100vh; /* Full height below intro */
+    min-height: 100vh;
 }
 
 /* Report box on the left */
@@ -145,7 +149,7 @@ body {
 }
 
 #map {
-    height: calc(100vh - 4rem); /* Full height minus padding/margins */
+    height: calc(100vh - 4rem);
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
