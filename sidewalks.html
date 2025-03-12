@@ -57,10 +57,10 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         let map;
-        let reports = [];
+        let reports = JSON.parse(localStorage.getItem('sidewalkReports')) || []; // Load from LocalStorage
         let markers = [];
-        let tempMarker = null; // Temporary marker for selected location
-        let selectedLatLng = null; // Store clicked location
+        let tempMarker = null;
+        let selectedLatLng = null;
 
         function initMap() {
             map = L.map('map').setView([43.8260, -111.7897], 14);
@@ -68,9 +68,9 @@
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
+            // Load existing reports
             reports.forEach(report => addMarker(report));
 
-            // Add click event to select location
             map.on('click', function(e) {
                 if (tempMarker) {
                     map.removeLayer(tempMarker);
@@ -100,34 +100,38 @@
                 return;
             }
 
-            const report = {
-                id: Date.now(),
-                lat: selectedLatLng.lat,
-                lng: selectedLatLng.lng,
-                description: description,
-                hazardImage: URL.createObjectURL(imageFile),
-                status: "hazardous",
-                resolvedImage: null,
-                resolvedDate: null
+            // Convert image to Base64 to store in LocalStorage
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const report = {
+                    id: Date.now(),
+                    lat: selectedLatLng.lat,
+                    lng: selectedLatLng.lng,
+                    description: description,
+                    hazardImage: e.target.result, // Base64 string
+                    status: "hazardous",
+                    resolvedImage: null,
+                    resolvedDate: null
+                };
+
+                reports.push(report);
+                localStorage.setItem('sidewalkReports', JSON.stringify(reports)); // Save to LocalStorage
+                addMarker(report);
+
+                if (tempMarker) {
+                    map.removeLayer(tempMarker);
+                    tempMarker = null;
+                }
+                selectedLatLng = null;
+                document.getElementById("location-feedback").classList.add("hidden");
+
+                const feedback = document.getElementById("report-feedback");
+                feedback.classList.remove("hidden");
+                setTimeout(() => feedback.classList.add("hidden"), 3000);
+
+                this.reset();
             };
-
-            reports.push(report);
-            addMarker(report);
-
-            // Clear temporary marker and feedback
-            if (tempMarker) {
-                map.removeLayer(tempMarker);
-                tempMarker = null;
-            }
-            selectedLatLng = null;
-            document.getElementById("location-feedback").classList.add("hidden");
-
-            // Show success feedback
-            const feedback = document.getElementById("report-feedback");
-            feedback.classList.remove("hidden");
-            setTimeout(() => feedback.classList.add("hidden"), 3000);
-
-            this.reset();
+            reader.readAsDataURL(imageFile);
         });
 
         function addMarker(report) {
@@ -189,11 +193,16 @@
                     event.preventDefault();
                     const resolveImageFile = document.getElementById(`resolve-image-${report.id}`).files[0];
                     
-                    report.status = "resolved";
-                    report.resolvedImage = URL.createObjectURL(resolveImageFile);
-                    report.resolvedDate = new Date().toLocaleDateString();
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        report.status = "resolved";
+                        report.resolvedImage = e.target.result; // Base64 string
+                        report.resolvedDate = new Date().toLocaleDateString();
 
-                    addMarker(report);
+                        localStorage.setItem('sidewalkReports', JSON.stringify(reports)); // Update LocalStorage
+                        addMarker(report);
+                    };
+                    reader.readAsDataURL(resolveImageFile);
                 });
             }
         }
