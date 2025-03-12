@@ -30,7 +30,7 @@ body.light-mode {
 /* Intro Section */
 .intro-section {
     height: 100vh;
-    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3'); /* High-quality Rexburg winter image */
     background-size: cover;
     background-position: center;
     position: relative;
@@ -216,8 +216,12 @@ body.dark-mode .map-container {
 }
 
 #daily-meme {
+    max-width: 100%; /* Ensures it fits the container */
+    height: auto; /* Maintains aspect ratio */
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block; /* Ensures it’s visible */
+    margin: 0 auto; /* Centers the image */
 }
 
 #new-meme {
