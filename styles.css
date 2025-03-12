@@ -1,224 +1,228 @@
-/* Winter-inspired color palette */
 :root {
-    --primary-blue: #2A5D9E;
-    --light-blue: #A3C9E2;
-    --white: #F9FAFB;
-    --gray: #D1D5DB;
-    --dark-gray: #4B5563;
-    --success-green: #28A745;
+    --coral: #FF6F61;      /* Fun, youthful coral */
+    --mint: #6CC644;       /* Fresh green */
+    --dark: #2D2D2D;       /* Sleek dark */
+    --light: #F9E7E7;      /* Soft light pink */
+    --gray: #A9A9A9;       /* Neutral gray */
+    --white: #FFFFFF;
 }
 
-/* General styling */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--white);
-    color: var(--dark-gray);
+    background-color: var(--light);
+    color: var(--dark);
     line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Intro section with background image */
+body.dark-mode {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+body.light-mode {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+/* Intro Section */
 .intro-section {
     height: 100vh;
-    background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c'); /* Winter street vibe */
     background-size: cover;
-    background-color: #ffcccc; /* Fallback color if image fails */
-    position: relative;
-    display: flex;           /* Added to center content */
-    justify-content: center; /* Added to center content */
-    align-items: center;     /* Added to center content */
-}
-/* Switch to local image once confirmed working */
-/* .intro-section { */
-/*     background-image: url('background.jpg'); */
-/* } */
-
-.intro-overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
+    background-position: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: background 0.3s ease;
-}
-
-.intro-section:hover .intro-overlay {
-    background: rgba(0, 0, 0, 0.4);
-    cursor: pointer;
+    text-align: center;
 }
 
 .intro-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 4rem;
     color: var(--white);
-    font-size: 3rem;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
     margin: 0;
 }
-/* Content section layout */
+
+.intro-subtitle {
+    font-size: 1.5rem;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.intro-btn {
+    background-color: var(--coral);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.2s;
+}
+
+.intro-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Content Section */
 .content-section {
     display: flex;
     min-height: 100vh;
 }
 
-/* Report box on the left */
 .report-box {
     width: 30%;
-    padding: 1.5rem;
+    padding: 2rem;
     background-color: var(--white);
-    border: 2px solid var(--primary-blue);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    overflow-y: auto;
+}
+
+body.dark-mode .report-box {
+    background-color: #3A3A3A;
 }
 
 .report-box h2 {
-    color: var(--primary-blue);
-    font-size: 1.5rem;
+    color: var(--coral);
+    font-size: 2rem;
     margin-top: 0;
-}
-
-.report-box p {
-    margin: 0.5rem 0;
-}
-
-.report-box form {
-    margin-top: 1rem;
-}
-
-.report-box label {
-    display: block;
-    margin: 0.75rem 0 0.25rem;
-    font-weight: bold;
-    font-size: 1rem;
 }
 
 .report-box textarea,
-.report-box input[type="file"] {
+.report-box input[type="file"],
+.report-box select {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--gray);
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 0.9rem;
+    padding: 0.75rem;
+    border: 2px solid var(--gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
-.report-box .submit-btn {
-    background-color: var(--primary-blue);
+.submit-btn {
+    background-color: var(--coral);
     color: var(--white);
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 2rem;
     border: none;
-    border-radius: 6px;
-    margin-top: 1rem;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.2rem;
     transition: background-color 0.3s;
 }
 
-.report-box .submit-btn:hover {
-    background-color: #1E4A7A;
+.submit-btn:hover {
+    background-color: #E65B50;
 }
 
-.report-box .feedback {
-    margin-top: 0.75rem;
-    padding: 0.25rem;
-    color: var(--success-green);
-    font-weight: bold;
+.feedback {
+    color: var(--mint);
+    font-weight: 600;
 }
 
-.report-box .hidden {
+.hidden {
     display: none;
 }
 
-/* Map container on the right */
+.vibe-check {
+    margin: 1rem 0;
+}
+
+/* Map Container */
 .map-container {
     width: 70%;
-    padding: 1rem;
-    background-color: var(--light-blue);
+    padding: 2rem;
+    background-color: var(--light);
     box-sizing: border-box;
 }
 
-.map-container h2 {
-    color: var(--primary-blue);
-    font-size: 1.5rem;
-    margin-top: 0;
+body.dark-mode .map-container {
+    background-color: #2D2D2D;
 }
 
-.map-container p {
-    margin: 0.5rem 0;
+.map-container h2 {
+    color: var(--coral);
+    font-size: 2rem;
 }
 
 #map {
-    height: calc(100vh - 4rem);
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: calc(100vh - 6rem);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Info window (popup) styling */
-.info-window form {
+.theme-toggle {
     margin-top: 1rem;
 }
 
-.info-window label {
-    display: block;
-    margin: 0.5rem 0;
-    font-weight: bold;
-}
-
-.info-window input[type="file"] {
-    width: 100%;
-    margin-bottom: 0.5rem;
-}
-
-.info-window .resolve-btn {
-    background-color: var(--primary-blue);
+.theme-toggle button {
+    background-color: var(--coral);
     color: var(--white);
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
+    margin-right: 0.5rem;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.info-window .resolve-btn:hover {
-    background-color: #1E4A7A;
+/* Meme Section */
+.meme-section {
+    padding: 2rem;
+    text-align: center;
 }
 
-.info-window p {
-    margin: 0 0 0.5rem;
+.meme-section h2 {
+    color: var(--coral);
+    font-size: 2rem;
 }
 
-/* Custom marker styling for Leaflet */
-.custom-marker {
-    border: none !important;
-    background: none !important;
+#daily-meme {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive design */
+#new-meme {
+    background-color: var(--mint);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+/* Popup */
+.info-window {
+    font-family: 'Poppins', sans-serif;
+}
+
+.resolve-btn {
+    background-color: var(--mint);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .content-section {
         flex-direction: column;
     }
-
-    .report-box {
+    .report-box, .map-container {
         width: 100%;
-        min-height: auto;
     }
-
-    .map-container {
-        width: 100%;
-        padding: 0.5rem;
-    }
-
     .intro-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
-
     #map {
-        height: 400px;
+        height: 50vh;
     }
 }
