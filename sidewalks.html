@@ -8,56 +8,40 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
-    <header>
-        <h1>Rexburg Sidewalks During Winter</h1>
-        <p>Keeping our community safe, one report at a time.</p>
-    </header>
+    <section class="intro-section">
+        <div class="intro-overlay">
+            <h1 class="intro-title">Report an Incident</h1>
+        </div>
+    </section>
 
-    <main>
-        <section class="intro-section">
-            <h2>Welcome to Rexburg Sidewalk Reports</h2>
-            <p>
-                Winter in Rexburg can make sidewalks slippery and dangerous. Click the map below to mark an issue’s location, then add a description and photo. Red markers show hazards, green markers show resolved issues.
-            </p>
-        </section>
-
-        <section class="report-section">
+    <section class="content-section">
+        <div class="report-box">
             <h2>Report a Sidewalk Issue</h2>
-            <p>Help keep Rexburg safe! Follow these steps:</p>
-            <ol>
-                <li>Click the map below to mark the issue’s location.</li>
-                <li>Add a description and photo.</li>
-                <li>Click "Submit Report".</li>
-            </ol>
+            <p>Click the map to mark the issue’s location, then submit below.</p>
             <form id="sidewalk-report">
-                <p id="location-feedback" class="feedback hidden">Selected location: <span id="lat-lng"></span></p>
+                <p id="location-feedback" class="feedback hidden">Selected: <span id="lat-lng"></span></p>
 
-                <label for="description">Description of Issue:</label>
-                <textarea id="description" name="description" rows="4" placeholder="Describe the sidewalk issue here..." required></textarea>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="3" placeholder="Describe the issue..." required></textarea>
 
-                <label for="image">Upload Hazard Photo:</label>
+                <label for="image">Upload Photo:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
 
                 <button type="submit" class="submit-btn">Submit Report</button>
             </form>
-            <p id="report-feedback" class="feedback hidden">Report submitted successfully! Check the map.</p>
-        </section>
-
-        <section class="map-section">
-            <h2>Live Sidewalk Reports</h2>
-            <p>Red = Hazardous | Green = Resolved. Click the map to select a location for your report.</p>
+            <p id="report-feedback" class="feedback hidden">Report submitted!</p>
+        </div>
+        <div class="map-container">
+            <h2>Live Reports</h2>
+            <p>Red = Hazardous | Green = Resolved</p>
             <div id="map"></div>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2025 Rexburg Community. Stay safe this winter!</p>
-    </footer>
+        </div>
+    </section>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         let map;
-        let reports = JSON.parse(localStorage.getItem('sidewalkReports')) || []; // Load from LocalStorage
+        let reports = JSON.parse(localStorage.getItem('sidewalkReports')) || [];
         let markers = [];
         let tempMarker = null;
         let selectedLatLng = null;
@@ -68,7 +52,6 @@
                 attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Load existing reports
             reports.forEach(report => addMarker(report));
 
             map.on('click', function(e) {
@@ -100,7 +83,6 @@
                 return;
             }
 
-            // Convert image to Base64 to store in LocalStorage
             const reader = new FileReader();
             reader.onload = function(e) {
                 const report = {
@@ -108,14 +90,14 @@
                     lat: selectedLatLng.lat,
                     lng: selectedLatLng.lng,
                     description: description,
-                    hazardImage: e.target.result, // Base64 string
+                    hazardImage: e.target.result,
                     status: "hazardous",
                     resolvedImage: null,
                     resolvedDate: null
                 };
 
                 reports.push(report);
-                localStorage.setItem('sidewalkReports', JSON.stringify(reports)); // Save to LocalStorage
+                localStorage.setItem('sidewalkReports', JSON.stringify(reports));
                 addMarker(report);
 
                 if (tempMarker) {
@@ -196,10 +178,10 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         report.status = "resolved";
-                        report.resolvedImage = e.target.result; // Base64 string
+                        report.resolvedImage = e.target.result;
                         report.resolvedDate = new Date().toLocaleDateString();
 
-                        localStorage.setItem('sidewalkReports', JSON.stringify(reports)); // Update LocalStorage
+                        localStorage.setItem('sidewalkReports', JSON.stringify(reports));
                         addMarker(report);
                     };
                     reader.readAsDataURL(resolveImageFile);
