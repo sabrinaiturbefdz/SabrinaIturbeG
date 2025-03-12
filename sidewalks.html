@@ -14,7 +14,7 @@
         </div>
     </section>
 
-    <section class="content-section">
+    <section class="content-section" id="content">
         <div class="report-box">
             <h2>Report a Sidewalk Issue</h2>
             <p>Click the map to mark the issue’s location, then submit below.</p>
@@ -188,6 +188,11 @@
                 });
             }
         }
+
+        // Smooth scroll to content on title click
+        document.querySelector('.intro-title').addEventListener('click', function() {
+            document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
+        });
 
         window.onload = initMap;
     </script>
