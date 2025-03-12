@@ -18,120 +18,137 @@ body {
     line-height: 1.6;
 }
 
-header {
-    background-color: var(--primary-blue);
+/* Intro section with background image */
+.intro-section {
+    height: 100vh;
+    background: url('background.jpg') no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+    transition: background 0.3s ease;
+}
+
+.intro-section:hover .intro-overlay {
+    background: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}
+
+.intro-title {
     color: var(--white);
+    font-size: 3rem;
     text-align: center;
-    padding: 2rem 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
+    z-index: 1;
     margin: 0;
-    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-header p {
-    margin: 0.5rem 0 0;
-    font-size: 1.2rem;
+/* Content section layout */
+.content-section {
+    display: flex;
+    min-height: 100vh; /* Full height below intro */
 }
 
-main {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-
-/* Section styling */
-section {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background-color: var(--light-blue);
-    border-radius: 8px;
+/* Report box on the left */
+.report-box {
+    width: 30%;
+    padding: 1.5rem;
+    background-color: var(--white);
+    border: 2px solid var(--primary-blue);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
-section h2 {
+.report-box h2 {
     color: var(--primary-blue);
+    font-size: 1.5rem;
     margin-top: 0;
-    font-size: 2rem;
 }
 
-section p {
+.report-box p {
     margin: 0.5rem 0;
 }
 
-/* Intro section */
-.intro-section {
-    background-color: var(--white);
+.report-box form {
+    margin-top: 1rem;
 }
 
-/* Report section */
-.report-section {
-    background-color: var(--white);
-    border: 2px solid var(--primary-blue);
-}
-
-.report-section ol {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-}
-
-.report-section form {
-    margin-top: 1.5rem;
-}
-
-.report-section label {
+.report-box label {
     display: block;
-    margin: 1rem 0 0.5rem;
+    margin: 0.75rem 0 0.25rem;
     font-weight: bold;
-    font-size: 1.1rem;
-}
-
-.report-section textarea,
-.report-section input[type="file"] {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--gray);
-    border-radius: 4px;
-    box-sizing: border-box;
     font-size: 1rem;
 }
 
-.report-section .submit-btn {
+.report-box textarea,
+.report-box input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+}
+
+.report-box .submit-btn {
     background-color: var(--primary-blue);
     color: var(--white);
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 6px;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1rem;
     transition: background-color 0.3s;
 }
 
-.report-section .submit-btn:hover {
+.report-box .submit-btn:hover {
     background-color: #1E4A7A;
 }
 
-.report-section .feedback {
-    margin-top: 1rem;
-    padding: 0.5rem;
+.report-box .feedback {
+    margin-top: 0.75rem;
+    padding: 0.25rem;
     color: var(--success-green);
     font-weight: bold;
 }
 
-.report-section .hidden {
+.report-box .hidden {
     display: none;
 }
 
-/* Map section */
-.map-section #map {
-    height: 500px;
+/* Map container on the right */
+.map-container {
+    width: 70%;
+    padding: 1rem;
+    background-color: var(--light-blue);
+    box-sizing: border-box;
+}
+
+.map-container h2 {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.map-container p {
+    margin: 0.5rem 0;
+}
+
+#map {
+    height: calc(100vh - 4rem); /* Full height minus padding/margins */
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 1rem;
 }
 
 /* Info window (popup) styling */
@@ -174,41 +191,27 @@ section p {
     background: none !important;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: var(--gray);
-    color: var(--dark-gray);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
 /* Responsive design */
 @media (max-width: 768px) {
-    header h1 {
+    .content-section {
+        flex-direction: column;
+    }
+
+    .report-box {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .map-container {
+        width: 100%;
+        padding: 0.5rem;
+    }
+
+    .intro-title {
         font-size: 2rem;
     }
 
-    header p {
-        font-size: 1rem;
-    }
-
-    section {
-        padding: 1.5rem;
-    }
-
-    section h2 {
-        font-size: 1.5rem;
-    }
-
-    .map-section #map {
+    #map {
         height: 400px;
-    }
-
-    .report-section .submit-btn {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
     }
 }
