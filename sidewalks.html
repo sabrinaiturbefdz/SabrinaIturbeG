@@ -10,7 +10,7 @@
 <body>
     <section class="intro-section">
         <div class="intro-overlay">
-            <h1 class="intro-title">Report an Incident</h1>
+            <h1 class="intro-title">Report an Incident!</h1>
         </div>
     </section>
 
@@ -127,7 +127,7 @@
             const marker = L.marker([report.lat, report.lng], {
                 icon: L.divIcon({
                     className: 'custom-marker',
-                    html: `<span style="background-color: ${markerColor}; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>`,
+                    html: `<span style="background-color: ${markerColor}; width: 20px; height: 20px; display: block; border-radius: 20%;"></span>`,
                     iconSize: [20, 20]
                 })
             }).addTo(map);
