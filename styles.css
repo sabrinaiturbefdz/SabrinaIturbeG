@@ -21,29 +21,24 @@ body {
 /* Intro section with background image */
 .intro-section {
     height: 100vh;
-    background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover; /* Test image */
-    /* Replace with: url('background.jpg') once confirmed working */
+    background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+    /* Fallback color to confirm CSS */
+    background-color: #ffcccc; /* Light red - should only show if image fails */
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .intro-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.2); /* Light transparent overlay */
-    transition: background 0.3s ease;
+    background: rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background 0.3s ease;
 }
 
 .intro-section:hover .intro-overlay {
-    background: rgba(0, 0, 0, 0.4); /* Slightly darker on hover, still transparent */
+    background: rgba(0, 0, 0, 0.4); /* Slightly darker, still transparent */
     cursor: pointer;
 }
 
@@ -51,9 +46,8 @@ body {
     color: var(--white);
     font-size: 3rem;
     text-align: center;
-    z-index: 1;
-    margin: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
 }
 
 /* Content section layout */
@@ -218,5 +212,3 @@ body {
 
     #map {
         height: 400px;
-    }
-}
