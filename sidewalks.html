@@ -3,39 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rexburg Sidewalks During Winter</title>
+    <title>Rexburg Snow Chaos</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
     <section class="intro-section">
-        <div class="intro-overlay">
-            <h1 class="intro-title">Report an Incident!</h1>
-        </div>
+        <h1 class="intro-title">Rexburg Snow Chaos</h1>
+        <p class="intro-subtitle">Drop a Pin, Save a Shin!</p>
+        <button class="intro-btn">Report a Slip Zone</button>
     </section>
 
     <section class="content-section" id="content">
         <div class="report-box">
-            <h2>Report a Sidewalk Issue</h2>
-            <p>Click the map to mark the issue’s location, then submit below.</p>
+            <h2>Spill the Tea on Icy Streets</h2>
+            <p>Tap the map, snap a pic, and warn your crew!</p>
             <form id="sidewalk-report">
-                <p id="location-feedback" class="feedback hidden">Selected: <span id="lat-lng"></span></p>
+                <p id="location-feedback" class="feedback hidden">Pinned: <span id="lat-lng"></span></p>
 
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" rows="3" placeholder="Describe the issue..." required></textarea>
+                <label for="description">What’s the Deal?</label>
+                <textarea id="description" name="description" rows="3" placeholder="Icy AF, snow pile, etc." required></textarea>
 
-                <label for="image">Upload Photo:</label>
+                <label for="image">Proof Pic:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
 
-                <button type="submit" class="submit-btn">Submit Report</button>
+                <div class="vibe-check">
+                    <label>Vibe Check:</label>
+                    <select id="vibe" name="vibe">
+                        <option value="sketch">Sketchy</option>
+                        <option value="nope">Big Nope</option>
+                        <option value="yikes">Yikes</option>
+                        <option value="chill">All Good Now</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Post It!</button>
             </form>
-            <p id="report-feedback" class="feedback hidden">Report submitted!</p>
+            <p id="report-feedback" class="feedback hidden">Posted, You Rock!</p>
         </div>
         <div class="map-container">
-            <h2>Live Reports</h2>
-            <p>Red = Hazardous | Green = Resolved</p>
+            <h2>Live Slip Map</h2>
+            <p>Red = Danger Zone | Green = Chill</p>
             <div id="map"></div>
+            <div class="theme-toggle">
+                <button id="dark-mode">Night Mode</button>
+                <button id="light-mode">Day Mode</button>
+            </div>
         </div>
+    </section>
+
+    <section class="meme-section">
+        <h2>Meme of the Day</h2>
+        <img src="https://via.placeholder.com/300x200.png?text=Sliding+into+Finals" alt="Meme" id="daily-meme">
+        <button id="new-meme">New Vibe</button>
     </section>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -55,14 +76,12 @@
             reports.forEach(report => addMarker(report));
 
             map.on('click', function(e) {
-                if (tempMarker) {
-                    map.removeLayer(tempMarker);
-                }
+                if (tempMarker) map.removeLayer(tempMarker);
                 selectedLatLng = e.latlng;
                 tempMarker = L.marker(selectedLatLng, {
                     icon: L.divIcon({
                         className: 'custom-marker',
-                        html: '<span style="background-color: orange; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>',
+                        html: '<span style="background-color: #FF6F61; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>',
                         iconSize: [20, 20]
                     })
                 }).addTo(map);
@@ -74,12 +93,12 @@
 
         document.getElementById("sidewalk-report").addEventListener("submit", function(event) {
             event.preventDefault();
-
             const description = document.getElementById("description").value;
             const imageFile = document.getElementById("image").files[0];
+            const vibe = document.getElementById("vibe").value;
 
             if (!selectedLatLng) {
-                alert("Please click the map to select the issue’s location.");
+                alert("Yo, pick a spot on the map first!");
                 return;
             }
 
@@ -91,7 +110,8 @@
                     lng: selectedLatLng.lng,
                     description: description,
                     hazardImage: e.target.result,
-                    status: "hazardous",
+                    status: vibe === "chill" ? "resolved" : "hazardous",
+                    vibe: vibe,
                     resolvedImage: null,
                     resolvedDate: null
                 };
@@ -123,11 +143,11 @@
                 markers = markers.filter(m => m.reportId !== report.id);
             }
 
-            const markerColor = report.status === "hazardous" ? 'red' : 'green';
+            const markerColor = report.status === "hazardous" ? '#FF6F61' : '#6CC644';
             const marker = L.marker([report.lat, report.lng], {
                 icon: L.divIcon({
                     className: 'custom-marker',
-                    html: `<span style="background-color: ${markerColor}; width: 20px; height: 20px; display: block; border-radius: 20%;"></span>`,
+                    html: `<span style="background-color: ${markerColor}; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>`,
                     iconSize: [20, 20]
                 })
             }).addTo(map);
@@ -144,22 +164,22 @@
             let content = `
                 <div class="info-window">
                     <p><strong>${report.description}</strong></p>
-                    <p>Status: ${report.status === "hazardous" ? "Hazardous" : "Resolved"}</p>
-                    <p>Location: ${report.lat.toFixed(5)}, ${report.lng.toFixed(5)}</p>
+                    <p>Vibe: ${report.vibe.charAt(0).toUpperCase() + report.vibe.slice(1)}</p>
+                    <p>Coords: ${report.lat.toFixed(5)}, ${report.lng.toFixed(5)}</p>
                     <img src="${report.hazardImage}" alt="Hazard" style="max-width: 200px;">
             `;
 
             if (report.status === "resolved" && report.resolvedImage) {
                 content += `
-                    <p>Resolved on: ${report.resolvedDate}</p>
+                    <p>Fixed on: ${report.resolvedDate}</p>
                     <img src="${report.resolvedImage}" alt="Resolved" style="max-width: 200px;">
                 `;
             } else {
                 content += `
                     <form id="resolve-form-${report.id}" enctype="multipart/form-data">
-                        <label for="resolve-image-${report.id}">Upload Resolved Photo:</label>
+                        <label for="resolve-image-${report.id}">Fixed Pic:</label>
                         <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
-                        <button type="submit" class="resolve-btn">Mark as Resolved</button>
+                        <button type="submit" class="resolve-btn">Mark Chill</button>
                     </form>
                 `;
             }
@@ -180,6 +200,7 @@
                         report.status = "resolved";
                         report.resolvedImage = e.target.result;
                         report.resolvedDate = new Date().toLocaleDateString();
+                        report.vibe = "chill";
 
                         localStorage.setItem('sidewalkReports', JSON.stringify(reports));
                         addMarker(report);
@@ -189,8 +210,30 @@
             }
         }
 
-        document.querySelector('.intro-title').addEventListener('click', function() {
+        document.querySelector('.intro-btn').addEventListener('click', function() {
             document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Theme Toggle
+        document.getElementById('dark-mode').addEventListener('click', () => {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        });
+        document.getElementById('light-mode').addEventListener('click', () => {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        });
+
+        // Meme Switcher (placeholder logic, replace with real meme URLs)
+        const memes = [
+            'https://via.placeholder.com/300x200.png?text=Sliding+into+Finals',
+            'https://via.placeholder.com/300x200.png?text=Ice+Ice+Baby',
+            'https://via.placeholder.com/300x200.png?text=Snow+Way+Bro'
+        ];
+        let memeIndex = 0;
+        document.getElementById('new-meme').addEventListener('click', () => {
+            memeIndex = (memeIndex + 1) % memes.length;
+            document.getElementById('daily-meme').src = memes[memeIndex];
         });
 
         window.onload = initMap;
