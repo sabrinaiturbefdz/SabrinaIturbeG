@@ -17,21 +17,20 @@
         <section class="intro-section">
             <h2>Welcome to Rexburg Sidewalk Reports</h2>
             <p>
-                Winter in Rexburg can make sidewalks slippery and dangerous. Report issues by entering an address or clicking the map, then adding a description and photo. Red markers show hazards, green markers show resolved issues.
+                Winter in Rexburg can make sidewalks slippery and dangerous. Click the map below to mark an issue’s location, then add a description and photo. Red markers show hazards, green markers show resolved issues.
             </p>
         </section>
 
         <section class="report-section">
             <h2>Report a Sidewalk Issue</h2>
-            <p>Help keep Rexburg safe! Choose a location by:</p>
+            <p>Help keep Rexburg safe! Follow these steps:</p>
             <ol>
-                <li>Typing an address below, OR</li>
-                <li>Clicking a spot on the map below.</li>
-                <li>Then add a description and photo, and submit.</li>
+                <li>Click the map below to mark the issue’s location.</li>
+                <li>Add a description and photo.</li>
+                <li>Click "Submit Report".</li>
             </ol>
             <form id="sidewalk-report">
-                <label for="location">Location (Address):</label>
-                <input type="text" id="location" name="location" placeholder="e.g., 123 Main St, Rexburg, ID">
+                <p id="location-feedback" class="feedback hidden">Selected location: <span id="lat-lng"></span></p>
 
                 <label for="description">Description of Issue:</label>
                 <textarea id="description" name="description" rows="4" placeholder="Describe the sidewalk issue here..." required></textarea>
@@ -42,12 +41,11 @@
                 <button type="submit" class="submit-btn">Submit Report</button>
             </form>
             <p id="report-feedback" class="feedback hidden">Report submitted successfully! Check the map.</p>
-            <p id="location-feedback" class="feedback hidden">Selected location: <span id="lat-lng"></span></p>
         </section>
 
         <section class="map-section">
             <h2>Live Sidewalk Reports</h2>
-            <p>Red = Hazardous | Green = Resolved. Click the map to select a location, or use the form above.</p>
+            <p>Red = Hazardous | Green = Resolved. Click the map to select a location for your report.</p>
             <div id="map"></div>
         </section>
     </main>
@@ -61,8 +59,8 @@
         let map;
         let reports = [];
         let markers = [];
-        let tempMarker = null; // For temporary marker when clicking map
-        let selectedLatLng = null; // Store clicked or geocoded location
+        let tempMarker = null; // Temporary marker for selected location
+        let selectedLatLng = null; // Store clicked location
 
         function initMap() {
             map = L.map('map').setView([43.8260, -111.7897], 14);
@@ -88,55 +86,24 @@
 
                 document.getElementById('lat-lng').textContent = `${selectedLatLng.lat.toFixed(5)}, ${selectedLatLng.lng.toFixed(5)}`;
                 document.getElementById('location-feedback').classList.remove('hidden');
-                document.getElementById('location').value = ''; // Clear address input if map is used
             });
         }
 
-        document.getElementById("sidewalk-report").addEventListener("submit", async function(event) {
+        document.getElementById("sidewalk-report").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            const location = document.getElementById("location").value.trim();
             const description = document.getElementById("description").value;
             const imageFile = document.getElementById("image").files[0];
 
-            let lat, lng;
-
-            if (location) {
-                // Geocode address using Nominatim
-                try {
-                    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json&limit=1`);
-                    const data = await response.json();
-                    if (data.length > 0) {
-                        lat = parseFloat(data[0].lat);
-                        lng = parseFloat(data[0].lon);
-                        if (tempMarker) {
-                            map.removeLayer(tempMarker);
-                            tempMarker = null;
-                        }
-                    } else {
-                        throw new Error("Location not found");
-                    }
-                } catch (error) {
-                    alert("Couldn’t find that address. Please click the map or try a different address.");
-                    return;
-                }
-            } else if (selectedLatLng) {
-                // Use map-clicked location
-                lat = selectedLatLng.lat;
-                lng = selectedLatLng.lng;
-                if (tempMarker) {
-                    map.removeLayer(tempMarker);
-                    tempMarker = null;
-                }
-            } else {
-                alert("Please enter an address or click the map to select a location.");
+            if (!selectedLatLng) {
+                alert("Please click the map to select the issue’s location.");
                 return;
             }
 
             const report = {
                 id: Date.now(),
-                lat: lat,
-                lng: lng,
+                lat: selectedLatLng.lat,
+                lng: selectedLatLng.lng,
                 description: description,
                 hazardImage: URL.createObjectURL(imageFile),
                 status: "hazardous",
@@ -147,12 +114,19 @@
             reports.push(report);
             addMarker(report);
 
+            // Clear temporary marker and feedback
+            if (tempMarker) {
+                map.removeLayer(tempMarker);
+                tempMarker = null;
+            }
+            selectedLatLng = null;
+            document.getElementById("location-feedback").classList.add("hidden");
+
+            // Show success feedback
             const feedback = document.getElementById("report-feedback");
             feedback.classList.remove("hidden");
             setTimeout(() => feedback.classList.add("hidden"), 3000);
 
-            document.getElementById("location-feedback").classList.add("hidden");
-            selectedLatLng = null;
             this.reset();
         });
 
