@@ -21,7 +21,7 @@ body {
 /* Intro section with background image */
 .intro-section {
     height: 100vh;
-    background: url('background.jpg') no-repeat center center/cover;
+    background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
     position: relative;
     display: flex;
     justify-content: center;
