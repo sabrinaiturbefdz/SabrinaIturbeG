@@ -30,7 +30,7 @@ body.light-mode {
 /* Intro Section */
 .intro-section {
     height: 100vh;
-    background-image: url('https://www.bing.com/images/search?view=detailV2&ccid=ARhR%2fxrm&id=057EDE263B0C8E969D41563BFDD9933E5A2C4C12&thid=OIP.ARhR_xrmUcpVtYOUEeisGQHaEs&mediaurl=https%3a%2f%2fsiteselection.com%2fcc%2fidaho%2f2017%2fimages%2f130710_Campus-Aerial_059.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.011851ff1ae651ca55b5839411e8ac19%3frik%3dEkwsWj6T2f07Vg%26pid%3dImgRaw%26r%3d0%26sres%3d1%26sresct%3d1%26srh%3d799%26srw%3d1263&exph=437&expw=690&q=rexburg+image&simid=608049516254428633&FORM=IRPRST&ck=0D9DC76EB946421FB043F5C98EF557E3&selectedIndex=0&itb=0&idpp=overlayview&ajaxhist=0&ajaxserp=0'); /* High-quality Rexburg winter image */
+    background-image: url('https://unsplash.com/photos/a-city-street-with-tall-buildings-in-the-background-e3E7EZp-9OE'); /* High-quality Rexburg winter image */
     background-size: cover;
     background-position: center;
     position: relative;
