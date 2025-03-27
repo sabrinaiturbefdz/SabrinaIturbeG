@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rexburg Chaos - Map</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-title">Rexburg Chaos</div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Map</a></li>
+                <li><a href="#">Review</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content-wrapper">
+        <section class="content-section" id="content">
+            <div class="report-box">
+                <h2>Report a Hazard</h2>
+                <p>Help keep Rexburg safe! Pinpoint icy spots or other sidewalk issues.</p>
+                <form id="sidewalk-report">
+                    <p id="location-feedback" class="feedback hidden">Location Selected: <span id="lat-lng"></span></p>
+
+                    <label for="description">Describe the Issue:</label>
+                    <textarea id="description" name="description" rows="3" placeholder="e.g., Black ice near the crosswalk, large snowdrift blocking the sidewalk" required></textarea>
+
+                    <label for="image">Add a Photo (Required):</label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
+
+                    <div class="vibe-check">
+                        <label>Severity Level:</label>
+                        <select id="vibe" name="vibe">
+                            <option value="sketch">Minor Obstruction</option>
+                            <option value="nope">Significant Hazard</option>
+                            <option value="yikes">Potentially Dangerous</option>
+                            <option value="chill">Issue Resolved (Mark as Clear)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Report</button>
+                </form>
+                <p id="report-feedback" class="feedback hidden">Thanks for the report! We appreciate your contribution.</p>
+            </div>
+
+            <div class="map-container">
+                <h2>Rexburg Slip & Trip Map</h2>
+                <p><span style="color: #FF6F61; font-weight: bold;">Red Markers</span> indicate reported hazards. <span style="color: #6CC644; font-weight: bold;">Green Markers</span> show areas marked as clear.</p>
+                <div id="map"></div>
+                <div class="theme-toggle">
+                    <button id="dark-mode">Night Mode</button>
+                    <button id="light-mode">Day Mode</button>
+                </div>
+                <p class="map-info">Click on the map to report a new issue. Tap on markers to view details or mark an area as resolved.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Rexburg Chaos</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        let map;
+        let reports = JSON.parse(localStorage.getItem('sidewalkReports')) || [];
+        let markers = [];
+        let tempMarker = null;
+        let selectedLatLng = null;
+
+        function initMap() {
+            map = L.map('map').setView([43.8260, -111.7897], 14);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            reports.forEach(report => addMarker(report));
+
+            map.on('click', function(e) {
+                if (tempMarker) map.removeLayer(tempMarker);
+                selectedLatLng = e.latlng;
+                tempMarker = L.marker(selectedLatLng, {
+                    icon: L.divIcon({
+                        className: 'custom-marker',
+                        html: '<span style="background-color: #FF6F61; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>',
+                        iconSize: [20, 20]
+                    })
+                }).addTo(map);
+
+                document.getElementById('lat-lng').textContent = `${selectedLatLng.lat.toFixed(5)}, ${selectedLatLng.lng.toFixed(5)}`;
+                document.getElementById('location-feedback').classList.remove('hidden');
+            });
+        }
+
+        document.getElementById("sidewalk-report").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const description = document.getElementById("description").value;
+            const imageFile = document.getElementById("image").files[0];
+            const vibe = document.getElementById("vibe").value;
+
+            if (!selectedLatLng) {
+                alert("Please click on the map to select the location of the issue.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const report = {
+                    id: Date.now(),
+                    lat: selectedLatLng.lat,
+                    lng: selectedLatLng.lng,
+                    description: description,
+                    hazardImage: e.target.result,
+                    status: vibe === "chill" ? "resolved" : "hazardous",
+                    vibe: vibe,
+                    resolvedImage: null,
+                    resolvedDate: null
+                };
+
+                reports.push(report);
+                localStorage.setItem('sidewalkReports', JSON.stringify(reports));
+                addMarker(report);
+
+                if (tempMarker) {
+                    map.removeLayer(tempMarker);
+                    tempMarker = null;
+                }
+                selectedLatLng = null;
+                document.getElementById("location-feedback").classList.add("hidden");
+
+                const feedback = document.getElementById("report-feedback");
+                feedback.classList.remove("hidden");
+                setTimeout(() => feedback.classList.add("hidden"), 3000);
+
+                this.reset();
+            };
+            reader.readAsDataURL(imageFile);
+        });
+
+        function addMarker(report) {
+            const existingMarker = markers.find(m => m.reportId === report.id);
+            if (existingMarker) {
+                map.removeLayer(existingMarker);
+                markers = markers.filter(m => m.reportId !== report.id);
+            }
+
+            const markerColor = report.status === "hazardous" ? '#FF6F61' : '#6CC644';
+            const marker = L.marker([report.lat, report.lng], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: `<span style="background-color: ${markerColor}; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>`,
+                    iconSize: [20, 20]
+                })
+            }).addTo(map);
+            marker.reportId = report.id;
+            markers.push(marker);
+
+            const popupContent = createPopupContent(report);
+            marker.bindPopup(popupContent);
+
+            marker.on('popupopen', () => attachResolveListener(report));
+        }
+
+        function createPopupContent(report) {
+            let content = `
+                <div class="info-window">
+                    <p><strong>Issue:</strong> ${report.description}</p>
+                    <p><strong>Severity:</strong> ${report.vibe.charAt(0).toUpperCase() + report.vibe.slice(1).replace('obstruction', ' Obstruction').replace('hazard', ' Hazard').replace('dangerous', ' Dangerous').replace('clear', ' Clear')}</p>
+                    <p><strong>Location:</strong> ${report.lat.toFixed(5)}, ${report.lng.toFixed(5)}</p>
+                    <img src="${report.hazardImage}" alt="Hazard" class="popup-image">
+            `;
+
+            if (report.status === "resolved" && report.resolvedImage) {
+                content += `
+                    <p><strong>Marked Clear On:</strong> ${report.resolvedDate}</p>
+                    <img src="${report.resolvedImage}" alt="Resolved" class="popup-image">
+                `;
+            } else {
+                content += `
+                    <form id="resolve-form-${report.id}" enctype="multipart/form-data">
+                        <label for="resolve-image-${report.id}">Photo of Cleared Area:</label>
+                        <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
+                        <button type="submit" class="resolve-btn">Mark as Clear</button>
+                    </form>
+                `;
+            }
+
+            content += `</div>`;
+            return content;
+        }
+
+        function attachResolveListener(report) {
+            const form = document.getElementById(`resolve-form-${report.id}`);
+            if (form) {
+                form.addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    const resolveImageFile = document.getElementById(`resolve-image-${report.id}`).files[0];
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        report.status = "resolved";
+                        report.resolvedImage = e.target.result;
+                        report.resolvedDate = new Date().toLocaleDateString();
+                        report.vibe = "chill";
+
+                        localStorage.setItem('sidewalkReports', JSON.stringify(reports));
+                        addMarker(report);
+                        map.closePopup(); // Close the popup after resolving
+                    };
+                    reader.readAsDataURL(resolveImageFile);
+                });
+            }
+        }
+
+        // Theme Toggle
+        document.getElementById('dark-mode').addEventListener('click', () => {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        });
+        document.getElementById('light-mode').addEventListener('click', () => {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        });
+
+        window.onload = initMap;
+    </script>
+    <style>
+        .map-info {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</body>
+</html>
