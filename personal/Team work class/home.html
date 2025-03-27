@@ -24,7 +24,7 @@
         <div class="hero-content">
             <h1>Rexburg Chaos</h1>
             <p>Drop a Pin, Save a Shin!</p>
-            <a href="#" class="btn learn-more-btn">Report a Slip Zone</a>
+            <a href="#content" class="btn learn-more-btn">Report a Slip Zone</a>
         </div>
     </section>
 
@@ -70,35 +70,35 @@
 
     <section class="content-section" id="content">
         <div class="report-box">
-            <h2>Report a Sidewalk Hazard</h2>
-            <p>Help us identify slippery spots and other issues.</p>
+            <h2>Spill the Tea on Icy Streets</h2>
+            <p>Tap the map, snap a pic, and warn your crew!</p>
             <form id="sidewalk-report">
                 <p id="location-feedback" class="feedback hidden">Pinned: <span id="lat-lng"></span></p>
 
-                <label for="description">Description of Hazard:</label>
-                <textarea id="description" name="description" rows="3" placeholder="e.g., Icy patch near the crosswalk" required></textarea>
+                <label for="description">What’s the Deal?</label>
+                <textarea id="description" name="description" rows="3" placeholder="Icy AF, snow pile, etc." required></textarea>
 
-                <label for="image">Upload an Image:</label>
+                <label for="image">Proof Pic:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
 
                 <div class="vibe-check">
-                    <label>Severity:</label>
+                    <label>Vibe Check:</label>
                     <select id="vibe" name="vibe">
-                        <option value="sketch">Slightly Slippery</option>
-                        <option value="nope">Very Hazardous</option>
-                        <option value="yikes">Caution Recommended</option>
-                        <option value="chill">Seems Clear</option>
+                        <option value="sketch">Sketchy</option>
+                        <option value="nope">Big No</option>
+                        <option value="yikes">Yikes</option>
+                        <option value="chill">All Good Now</option>
                     </select>
                 </div>
 
-                <button type="submit" class="submit-btn">Submit Report</button>
+                <button type="submit" class="submit-btn">Post It!</button>
             </form>
-            <p id="report-feedback" class="feedback hidden">Report submitted! Thank you.</p>
+            <p id="report-feedback" class="feedback hidden">Posted, You Rock!</p>
         </div>
 
         <div class="map-container">
-            <h2>Live Hazard Map</h2>
-            <p>See reported hazards in real-time.</p>
+            <h2>Live Slip Map</h2>
+            <p>Red = Danger Zone | Green = Chill</p>
             <div id="map"></div>
             <div class="theme-toggle">
                 <button id="dark-mode">Night Mode</button>
@@ -156,7 +156,7 @@
             const vibe = document.getElementById("vibe").value;
 
             if (!selectedLatLng) {
-                alert("Please click on the map to select a location.");
+                alert("Yo, pick a spot on the map first!");
                 return;
             }
 
@@ -222,25 +222,23 @@
             let content = `
                 <div class="info-window">
                     <p><strong>${report.description}</strong></p>
-                    <p>Severity: ${report.vibe.charAt(0).toUpperCase() + report.vibe.slice(1)}</p>
+                    <p>Vibe: ${report.vibe.charAt(0).toUpperCase() + report.vibe.slice(1)}</p>
                     <p>Coords: ${report.lat.toFixed(5)}, ${report.lng.toFixed(5)}</p>
-                    <img src="${report.hazardImage}" alt="Hazard" style="max-width: 200px;">
+                    <img src="${report.hazardImage}" alt="Hazard" class="popup-image">
             `;
 
             if (report.status === "resolved" && report.resolvedImage) {
                 content += `
-                        <p>Fixed on: ${report.resolvedDate}</p>
-                        <img
-
-src="${report.resolvedImage}" alt="Resolved" style="max-width: 200px;">
+                    <p>Fixed on: ${report.resolvedDate}</p>
+                    <img src="${report.resolvedImage}" alt="Resolved" class="popup-image">
                 `;
             } else {
                 content += `
-                        <form id="resolve-form-${report.id}" enctype="multipart/form-data">
-                            <label for="resolve-image-${report.id}">Fixed Pic:</label>
-                            <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
-                            <button type="submit" class="resolve-btn">Mark Chill</button>
-                        </form>
+                    <form id="resolve-form-${report.id}" enctype="multipart/form-data">
+                        <label for="resolve-image-${report.id}">Fixed Pic:</label>
+                        <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
+                        <button type="submit" class="resolve-btn">Mark Chill</button>
+                    </form>
                 `;
             }
 
@@ -254,7 +252,7 @@ src="${report.resolvedImage}" alt="Resolved" style="max-width: 200px;">
                 form.addEventListener("submit", function(event) {
                     event.preventDefault();
                     const resolveImageFile = document.getElementById(`resolve-image-${report.id}`).files[0];
-
+                    
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         report.status = "resolved";
