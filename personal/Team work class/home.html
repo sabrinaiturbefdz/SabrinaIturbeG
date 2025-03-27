@@ -13,67 +13,68 @@
         <div class="header-title">Rexburg Chaos</div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
                 <li><a href="map.html">Map</a></li>
-                <li><a href="#">Review</a></li>
+                <li><a href="reviews.html">Review</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Navigating Rexburg, One Safe Step at a Time</h1>
-            <p>Your go-to platform for real-time sidewalk hazard reporting and safer routes around campus and town.</p>
-            <a href="map.html" class="btn learn-more-btn">View Map</a>
-        </div>
-    </section>
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Navigating Rexburg, One Safe Step at a Time</h1>
+                <p>Your go-to platform for real-time sidewalk hazard reporting and safer routes around campus and town.</p>
+                <a href="map.html" class="btn learn-more-btn">View Hazard Map</a>
+            </div>
+        </section>
 
-    <section id="mission" class="mission-section">
-        <div class="mission-content">
-            <h2>Our Mission</h2>
-            <p>Rexburg Chaos is dedicated to creating a more secure and accessible Rexburg by providing a community-driven platform for reporting and visualizing pedestrian hazards. We empower individuals to stay informed and navigate our city with greater confidence.</p>
-        </div>
-    </section>
+        <section id="mission" class="mission-section">
+            <div class="mission-content">
+                <h2>Our Mission</h2>
+                <p>Rexburg Chaos is dedicated to creating a more secure and accessible Rexburg by providing a community-driven platform for reporting and visualizing pedestrian hazards. We empower individuals to stay informed and navigate our city with greater confidence.</p>
+            </div>
+        </section>
 
-    <section id="features" class="feature-grid">
-        <div class="feature-item home-feature">
-            <h2>Stay Informed</h2>
-            <p>Know before you go! Get the latest intel on slippery sidewalks and potential hazards.</p>
-            <div class="icon icon-wheelchair">♿</div>
-            <p><strong>View the Map</strong></p>
-            <p>Access our interactive map to see community-reported ice patches, snow obstructions, and other accessibility concerns.</p>
-            <a href="map.html" class="feature-btn view-more-btn">See the Map</a>
-        </div>
+        <section id="features" class="feature-grid">
+            <div class="feature-item home-feature">
+                <h2>Stay Informed</h2>
+                <p>Know before you go! Get the latest intel on slippery sidewalks and potential hazards.</p>
+                <div class="icon icon-wheelchair" aria-label="Accessibility Information">♿</div>
+                <p><strong>View the Map</strong></p>
+                <p>Access our interactive map to see community-reported ice patches, snow obstructions, and other accessibility concerns.</p>
+                <a href="map.html" class="feature-btn view-more-btn">See the Map</a>
+            </div>
 
-        <div class="feature-item about-feature">
-            <h2>About Us</h2>
-            <p>Learn more about the people and the vision behind Rexburg Chaos.</p>
-            <div class="icon icon-users">💬</div>
-            <p><strong>Our Story</strong></p>
-            <p>Discover how Rexburg Chaos was created to address the challenges of navigating Rexburg's seasonal conditions.</p>
-            <a href="#" class="feature-btn about-more-btn">Learn More</a>
-        </div>
+            <div class="feature-item about-feature">
+                <h2>About Us</h2>
+                <p>Learn more about the people and the vision behind Rexburg Chaos.</p>
+                <div class="icon icon-users" aria-label="About Us">💬</div>
+                <p><strong>Our Story</strong></p>
+                <p>Discover how Rexburg Chaos was created to address the challenges of navigating Rexburg's seasonal conditions.</p>
+                <a href="about.html" class="feature-btn about-more-btn">Learn More</a>
+            </div>
 
-        <div class="feature-item map-feature">
-            <h2>Real-Time Reporting</h2>
-            <p>Spot a problem? Help your fellow students and residents by reporting it instantly.</p>
-            <div class="icon icon-map">🗺</div>
-            <p><strong>Contribute to the Map</strong></p>
-            <p>Easily report new hazards with location tagging and descriptions. Your input helps everyone navigate Rexburg safely.</p>
-            <a href="map.html#content" class="feature-btn view-map-btn">Report an Issue</a>
-        </div>
+            <div class="feature-item map-feature">
+                <h2>Real-Time Reporting</h2>
+                <p>Spot a problem? Help your fellow students and residents by reporting it instantly.</p>
+                <div class="icon icon-map" aria-label="Map and Reporting">🗺</div>
+                <p><strong>Contribute to the Map</strong></p>
+                <p>Easily report new hazards with location tagging and descriptions. Your input helps everyone navigate Rexburg safely.</p>
+                <a href="map.html#report-hazard" class="feature-btn view-map-btn">Report an Issue</a>
+            </div>
 
-        <div class="feature-item contribute-feature">
-            <h2>Your Feedback</h2>
-            <p>Share your thoughts and help us make Rexburg Chaos even better.</p>
-            <div class="icon icon-reports">⚇</div>
-            <p><strong>Tell Us What You Think</strong></p>
-            <p>Your input is valuable in shaping the future of our platform.</p>
-            <a href="#" class="feature-btn view-report-btn">Give Feedback</a>
-        </div>
-    </section>
-
+            <div class="feature-item contribute-feature">
+                <h2>Your Feedback</h2>
+                <p>Share your thoughts and help us make Rexburg Chaos even better.</p>
+                <div class="icon icon-reports" aria-label="Feedback and Reviews">⚇</div>
+                <p><strong>Tell Us What You Think</strong></p>
+                <p>Your input is valuable in shaping the future of our platform.</p>
+                <a href="feedback.html" class="feature-btn view-report-btn">Give Feedback</a>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <p>© 2025 Rexburg Chaos</p>
@@ -86,15 +87,28 @@
     <script>
         const darkModeButton = document.getElementById('dark-mode');
         const lightModeButton = document.getElementById('light-mode');
+        const body = document.body;
+        const themeKey = 'rexburgChaosTheme';
+
+        function setTheme(theme) {
+            body.classList.remove('dark-mode', 'light-mode');
+            body.classList.add(theme);
+            localStorage.setItem(themeKey, theme);
+        }
+
+        const savedTheme = localStorage.getItem(themeKey);
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme('light-mode'); // Default theme
+        }
 
         darkModeButton.addEventListener('click', () => {
-            document.body.classList.add('dark-mode');
-            document.body.classList.remove('light-mode');
+            setTheme('dark-mode');
         });
 
         lightModeButton.addEventListener('click', () => {
-            document.body.classList.add('light-mode');
-            document.body.classList.remove('dark-mode');
+            setTheme('light-mode');
         });
     </script>
 </body>
