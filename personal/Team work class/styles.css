@@ -1,5 +1,5 @@
 :root {
-    /* Color palette */
+    /* Color palette from new file */
     --primary-color: #1A1423;
     --secondary-color: #F0F0F0;
     --accent-color: #99C5B5;
@@ -9,7 +9,7 @@
     --feature-bg: #FFFFFF;
     --button-bg: var(--accent-color);
     --button-text: white;
-    --button-hover: #7ab3a1; /* Added for consistency */
+    --button-hover: #7ab3a1;
 }
 
 body {
@@ -55,25 +55,25 @@ nav a:hover {
                 url('images/rexburg_sidewalk.jpg') no-repeat center center/cover;
     padding: 4rem 0;
     text-align: center;
-    min-height: 400px; /* Added minimum height for better visibility */
-    display: flex; /* Added for better content centering */
+    min-height: 400px;
+    display: flex;
     align-items: center;
 }
 
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 1rem; /* Added padding for mobile */
+    padding: 0 1rem;
 }
 
 .hero-content h1 {
-    font-size: clamp(2rem, 3vw, 3rem); /* Responsive font size */
+    font-size: clamp(2rem, 3vw, 3rem);
     margin-bottom: 1rem;
     color: var(--primary-color);
 }
 
 .hero-content p {
-    font-size: clamp(1rem, 1.5vw, 1.2rem); /* Responsive font size */
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
     color: var(--primary-color);
     margin-bottom: 2rem;
 }
@@ -115,7 +115,23 @@ nav a:hover {
     text-align: center;
 }
 
-/* Rest of your CSS remains largely the same, but here's a few more improvements */
+.feature-item h2 {
+    font-size: 1.7rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+}
+
+.feature-item p {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.feature-item .icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+}
 
 /* Consolidate feature button styles */
 .feature-btn {
@@ -136,14 +152,269 @@ nav a:hover {
     color: white;
 }
 
-/* Assign this class to all feature buttons in HTML */
-.view-more-btn,
-.view-map-btn,
-.view-report-btn,
-.about-more-btn,
-.view-reviews-btn {
-    composes: feature-btn; /* If using CSS modules, otherwise just use the class */
+.map-placeholder img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
+
+/* Content Section */
+.content-section {
+    padding: 20px;
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.report-box {
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: var(--feature-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.report-box h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.report-box p {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.report-box label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.report-box input[type="file"],
+.report-box textarea,
+.report-box select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.report-box textarea {
+    resize: vertical;
+}
+
+.report-box .vibe-check {
+    margin: 1rem 0;
+}
+
+.report-box .vibe-check label {
+    display: inline-block;
+    margin-right: 1rem;
+    font-weight: normal;
+}
+
+.submit-btn {
+    background-color: var(--accent-color);
+    color: var(--button-text);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--button-hover);
+}
+
+.feedback {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.map-container {
+    width: 80%;
+    max-width: 800px;
+}
+
+.map-container h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.map-container p {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+#map {
+    height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.theme-toggle button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle button:hover {
+    background-color: #5a6268;
+}
+
+/* Meme Section */
+.meme-section {
+    padding: 30px;
+    text-align: center;
+    background-color: var(--secondary-color);
+}
+
+.meme-section h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+#daily-meme {
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#new-meme {
+    background-color: var(--accent-color);
+    color: var(--button-text);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#new-meme:hover {
+    background-color: var(--button-hover);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Map Popup and Marker */
+.info-window {
+    font-family: 'Poppins', sans-serif;
+}
+
+.popup-image {
+    max-width: 200px;
+}
+
+.resolve-btn {
+    background-color: var(--accent-color);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-marker {
+    border: none !important;
+    background: none !important;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --primary-color: #FFFFFF;
+    --secondary-color: #1A1423;
+    --nav-bg: #412234;
+    --hero-bg: #5e5951;
+    --feature-bg: #332836;
+    --link-color: #99C5B5;
+}
+
+body.dark-mode header {
+    border-bottom-color: #554458;
+}
+
+body.dark-mode nav a {
+    color: #eee;
+}
+
+body.dark-mode .report-box,
+body.dark-mode .feature-item {
+    background-color: var(--feature-bg);
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .report-box label,
+body.dark-mode .report-box h2,
+body.dark-mode .report-box p,
+body.dark-mode .map-container h2,
+body.dark-mode .map-container p,
+body.dark-mode .feature-item h2,
+body.dark-mode .feature-item p {
+    color: #eee;
+}
+
+body.dark-mode .report-box input[type="file"],
+body.dark-mode .report-box textarea,
+body.dark-mode .report-box select {
+    background-color: #443847;
+    border-color: #554458;
+    color: #eee;
+}
+
+body.dark-mode .meme-section,
+body.dark-mode .content-section {
+    background-color:不说: #1A1423;
+}
+
+body.dark-mode footer {
+    background-color: #412234;
+    color: #eee;
+}
+
+/* Icon Styles */
+.icon-wheelchair { font-size: 3rem; color: #99C5B5; }
+.icon-reports { font-size: 3rem; color: #899E8B; }
+.icon-users { font-size: 3rem; color: #706C61; }
+.icon-map { font-size: 3rem; color: #99C5B5; }
 
 /* Media Queries */
 @media (max-width: 768px) {
@@ -154,12 +425,21 @@ nav a:hover {
     }
 
     .hero-section {
-        padding: 2rem 0; /* Reduced padding for mobile */
+        padding: 2rem 0;
         min-height: 300px;
     }
 
     .feature-grid {
         grid-template-columns: 1fr;
         padding: 1rem;
+    }
+
+    .report-box,
+    .map-container {
+        width: 95%;
+    }
+
+    #daily-meme {
+        max-width: 90%;
     }
 }
