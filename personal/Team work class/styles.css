@@ -1,0 +1,165 @@
+:root {
+    /* Color palette */
+    --primary-color: #1A1423;
+    --secondary-color: #F0F0F0;
+    --accent-color: #99C5B5;
+    --link-color: #412234;
+    --nav-bg: #706C61;
+    --hero-bg: #899E8B;
+    --feature-bg: #FFFFFF;
+    --button-bg: var(--accent-color);
+    --button-text: white;
+    --button-hover: #7ab3a1; /* Added for consistency */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    line-height: 1.6;
+}
+
+/* Header and Navigation */
+header {
+    background-color: var(--nav-bg);
+    padding: 1rem 0;
+    border-bottom: 1px solid #5e5951;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(137, 158, 139, 0.2), rgba(137, 158, 139, 0.8)), 
+                url('images/rexburg_sidewalk.jpg') no-repeat center center/cover;
+    padding: 4rem 0;
+    text-align: center;
+    min-height: 400px; /* Added minimum height for better visibility */
+    display: flex; /* Added for better content centering */
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem; /* Added padding for mobile */
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 3vw, 3rem); /* Responsive font size */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 1.5vw, 1.2rem); /* Responsive font size */
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+/* Buttons - Consolidated styling */
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.learn-more-btn {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.learn-more-btn:hover {
+    background-color: var(--button-hover);
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 2rem;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    background-color: var(--feature-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Rest of your CSS remains largely the same, but here's a few more improvements */
+
+/* Consolidate feature button styles */
+.feature-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--link-color);
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    border: 1px solid var(--link-color);
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.feature-btn:hover {
+    background-color: var(--link-color);
+    color: white;
+}
+
+/* Assign this class to all feature buttons in HTML */
+.view-more-btn,
+.view-map-btn,
+.view-report-btn,
+.about-more-btn,
+.view-reviews-btn {
+    composes: feature-btn; /* If using CSS modules, otherwise just use the class */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .hero-section {
+        padding: 2rem 0; /* Reduced padding for mobile */
+        min-height: 300px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}

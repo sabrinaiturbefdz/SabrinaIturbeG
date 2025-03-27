@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rexburg Chaos</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Map</a></li>
+                <li><a href="#">Reviews</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Rexburg Chaos</h1>
+            <p>Drop a Pin, Save a Shin!</p>
+            <a href="#" class="btn learn-more-btn">Report a Slip Zone</a>
+        </div>
+    </section>
+
+    <section class="feature-grid">
+        <div class="feature-item home-feature">
+            <h2>Home</h2>
+            <p>Find out where the slippery roads are!</p>
+            <div class="icon icon-wheelchair">♿</div>
+            <p>View it Map</p>
+            <p>Explore the interactive map to see reported hazards and safe routes.</p>
+            <a href="#content" class="feature-btn view-more-btn">View More</a>
+        </div>
+
+        <div class="feature-item map-feature">
+            <h2>Map</h2>
+            <p>Report and view sidewalk accessibility issues in Rexburg.</p>
+            <div class="icon icon-map">🗺</div>
+            <p>See problem areas marked by the community. Click on the map to report a new hazard.</p>
+            <a href="#content" class="feature-btn view-map-btn">View Map</a>
+        </div>
+
+        <div class="feature-item contribute-feature">
+            <h2>Contribute</h2>
+            <p>Help make Rexburg more accessible for everyone.</p>
+            <div class="icon icon-reports">⚇</div>
+            <p>Accessibility Reports</p>
+            <p>Submit reports on icy sidewalks, snow piles, or other obstacles.</p>
+            <a href="#content" class="feature-btn view-report-btn">Report a Slip Zone</a>
+        </div>
+
+        <div class="feature-item about-feature">
+            <h2>About Us</h2>
+            <p>Learn more about our mission and team.</p>
+            <div class="icon icon-users">👪</div>
+            <p>About More</p>
+            <div class="map-placeholder">
+                <img src="placeholder-map.png" alt="Map Placeholder">
+            </div>
+            <p>We are dedicated to improving pedestrian safety in Rexburg.</p>
+            <a href="#" class="feature-btn about-more-btn">About More</a>
+        </div>
+    </section>
+
+    <section class="content-section" id="content">
+        <div class="report-box">
+            <h2>Report a Sidewalk Hazard</h2>
+            <p>Help us identify slippery spots and other issues.</p>
+            <form id="sidewalk-report">
+                <p id="location-feedback" class="feedback hidden">Pinned: <span id="lat-lng"></span></p>
+
+                <label for="description">Description of Hazard:</label>
+                <textarea id="description" name="description" rows="3" placeholder="e.g., Icy patch near the crosswalk" required></textarea>
+
+                <label for="image">Upload an Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+
+                <div class="vibe-check">
+                    <label>Severity:</label>
+                    <select id="vibe" name="vibe">
+                        <option value="sketch">Slightly Slippery</option>
+                        <option value="nope">Very Hazardous</option>
+                        <option value="yikes">Caution Recommended</option>
+                        <option value="chill">Seems Clear</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Report</button>
+            </form>
+            <p id="report-feedback" class="feedback hidden">Report submitted! Thank you.</p>
+        </div>
+
+        <div class="map-container">
+            <h2>Live Hazard Map</h2>
+            <p>See reported hazards in real-time.</p>
+            <div id="map"></div>
+            <div class="theme-toggle">
+                <button id="dark-mode">Night Mode</button>
+                <button id="light-mode">Day Mode</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="meme-section">
+        <h2>Stay Safe Out There!</h2>
+        <img src="https://i.imgflip.com/8n7g5v.jpg" alt="Sliding into Finals Meme" id="daily-meme">
+        <button id="new-meme">New Vibe</button>
+    </section>
+
+    <footer>
+        <p>© 2025 Rexburg Chaos</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        let map;
+        let reports = JSON.parse(localStorage.getItem('sidewalkReports')) || [];
+        let markers = [];
+        let tempMarker = null;
+        let selectedLatLng = null;
+
+        function initMap() {
+            map = L.map('map').setView([43.8260, -111.7897], 14);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            reports.forEach(report => addMarker(report));
+
+            map.on('click', function(e) {
+                if (tempMarker) map.removeLayer(tempMarker);
+                selectedLatLng = e.latlng;
+                tempMarker = L.marker(selectedLatLng, {
+                    icon: L.divIcon({
+                        className: 'custom-marker',
+                        html: '<span style="background-color: #FF6F61; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>',
+                        iconSize: [20, 20]
+                    })
+                }).addTo(map);
+
+                document.getElementById('lat-lng').textContent = `${selectedLatLng.lat.toFixed(5)}, ${selectedLatLng.lng.toFixed(5)}`;
+                document.getElementById('location-feedback').classList.remove('hidden');
+            });
+        }
+
+        document.getElementById("sidewalk-report").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const description = document.getElementById("description").value;
+            const imageFile = document.getElementById("image").files[0];
+            const vibe = document.getElementById("vibe").value;
+
+            if (!selectedLatLng) {
+                alert("Please click on the map to select a location.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const report = {
+                    id: Date.now(),
+                    lat: selectedLatLng.lat,
+                    lng: selectedLatLng.lng,
+                    description: description,
+                    hazardImage: e.target.result,
+                    status: vibe === "chill" ? "resolved" : "hazardous",
+                    vibe: vibe,
+                    resolvedImage: null,
+                    resolvedDate: null
+                };
+
+                reports.push(report);
+                localStorage.setItem('sidewalkReports', JSON.stringify(reports));
+                addMarker(report);
+
+                if (tempMarker) {
+                    map.removeLayer(tempMarker);
+                    tempMarker = null;
+                }
+                selectedLatLng = null;
+                document.getElementById("location-feedback").classList.add("hidden");
+
+                const feedback = document.getElementById("report-feedback");
+                feedback.classList.remove("hidden");
+                setTimeout(() => feedback.classList.add("hidden"), 3000);
+
+                this.reset();
+            };
+            reader.readAsDataURL(imageFile);
+        });
+
+        function addMarker(report) {
+            const existingMarker = markers.find(m => m.reportId === report.id);
+            if (existingMarker) {
+                map.removeLayer(existingMarker);
+                markers = markers.filter(m => m.reportId !== report.id);
+            }
+
+            const markerColor = report.status === "hazardous" ? '#FF6F61' : '#6CC644';
+            const marker = L.marker([report.lat, report.lng], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: `<span style="background-color: ${markerColor}; width: 20px; height: 20px; display: block; border-radius: 50%;"></span>`,
+                    iconSize: [20, 20]
+                })
+            }).addTo(map);
+            marker.reportId = report.id;
+            markers.push(marker);
+
+            const popupContent = createPopupContent(report);
+            marker.bindPopup(popupContent);
+
+            marker.on('popupopen', () => attachResolveListener(report));
+        }
+
+        function createPopupContent(report) {
+            let content = `
+                <div class="info-window">
+                    <p><strong>${report.description}</strong></p>
+                    <p>Severity: ${report.vibe.charAt(0).toUpperCase() + report.vibe.slice(1)}</p>
+                    <p>Coords: ${report.lat.toFixed(5)}, ${report.lng.toFixed(5)}</p>
+                    <img src="${report.hazardImage}" alt="Hazard" style="max-width: 200px;">
+            `;
+
+            if (report.status === "resolved" && report.resolvedImage) {
+                content += `
+                        <p>Fixed on: ${report.resolvedDate}</p>
+                        <img
+
+src="${report.resolvedImage}" alt="Resolved" style="max-width: 200px;">
+                `;
+            } else {
+                content += `
+                        <form id="resolve-form-${report.id}" enctype="multipart/form-data">
+                            <label for="resolve-image-${report.id}">Fixed Pic:</label>
+                            <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
+                            <button type="submit" class="resolve-btn">Mark Chill</button>
+                        </form>
+                `;
+            }
+
+            content += `</div>`;
+            return content;
+        }
+
+        function attachResolveListener(report) {
+            const form = document.getElementById(`resolve-form-${report.id}`);
+            if (form) {
+                form.addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    const resolveImageFile = document.getElementById(`resolve-image-${report.id}`).files[0];
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        report.status = "resolved";
+                        report.resolvedImage = e.target.result;
+                        report.resolvedDate = new Date().toLocaleDateString();
+                        report.vibe = "chill";
+
+                        localStorage.setItem('sidewalkReports', JSON.stringify(reports));
+                        addMarker(report);
+                    };
+                    reader.readAsDataURL(resolveImageFile);
+                });
+            }
+        }
+
+        // Theme Toggle
+        document.getElementById('dark-mode').addEventListener('click', () => {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        });
+        document.getElementById('light-mode').addEventListener('click', () => {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+        });
+
+        // Meme Switcher
+        const memes = [
+            'https://i.imgflip.com/8n7g5v.jpg',
+            'https://i.imgflip.com/8n7h0k.jpg',
+            'https://i.imgflip.com/8n7h8r.jpg'
+        ];
+        let memeIndex = 0;
+        document.getElementById('new-meme').addEventListener('click', () => {
+            memeIndex = (memeIndex + 1) % memes.length;
+            document.getElementById('daily-meme').src = memes[memeIndex];
+        });
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>
