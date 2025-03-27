@@ -1,15 +1,18 @@
 :root {
-    /* Color palette from new file */
+    /* Color palette */
     --primary-color: #1A1423;
     --secondary-color: #F0F0F0;
-    --accent-color: #99C5B5;
+    --accent-color: #194769;
     --link-color: #412234;
-    --nav-bg: #706C61;
-    --hero-bg: #899E8B;
+    --nav-bg: #0c293d;
+    --hero-bg: var(--nav-bg); /* Changed --hero-bg to use --nav-bg */
     --feature-bg: #FFFFFF;
     --button-bg: var(--accent-color);
     --button-text: white;
-    --button-hover: #7ab3a1;
+    --button-hover: #518396;
+    --header-font-family: 'Poppins', sans-serif;
+    --header-font-weight: 600;
+    --footer-font-size: 0.9rem;
 }
 
 body {
@@ -24,14 +27,38 @@ body {
 /* Header and Navigation */
 header {
     background-color: var(--nav-bg);
-    padding: 1rem 0;
+    padding: 1rem 1rem;
     border-bottom: 1px solid #5e5951;
+    display: flex;
+    justify-content: flex-start; /* Align items to the start to accommodate the logo */
+    align-items: center;
+    gap: 15px; /* Add some space between the logo and title */
+}
+
+.logo {
+    width: 80px; /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
+    border-radius: 80%;
+    object-fit: cover; /* Ensures the image fills the circle without distortion */
+}
+
+.header-title {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    font-weight: var(--header-font-weight);
+    font-family: var(--header-font-family);
+}
+
+nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
     display: flex;
     justify-content: center;
     gap: 2rem;
@@ -41,8 +68,10 @@ nav ul {
 nav a {
     text-decoration: none;
     color: var(--secondary-color);
-    font-weight: 600;
+    font-weight: var(--header-font-weight);
     transition: color 0.3s ease;
+    font-family: var(--header-font-family);
+    font-size: 1rem;
 }
 
 nav a:hover {
@@ -51,50 +80,73 @@ nav a:hover {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(137, 158, 139, 0.2), rgba(137, 158, 139, 0.8)), 
-                url('images/rexburg_sidewalk.jpg') no-repeat center center/cover;
-    padding: 4rem 0;
+    background: linear-gradient(rgba(137, 158, 139, 0.3), rgba(12, 41, 61, 0.6)),
+                url('images/rexburg_sidewalk.jpg') no-repeat center center/cover,
+                var(--hero-bg); /* Added --hero-bg as a fallback background */
+    padding: 3rem 0;
     text-align: center;
-    min-height: 400px;
+    min-height: 350px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    color: var(--secondary-color); /* Changed default text color to be visible on the new background */
 }
 
 .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    max-width: 90%;
 }
 
 .hero-content h1 {
-    font-size: clamp(2rem, 3vw, 3rem);
-    margin-bottom: 1rem;
-    color: var(--primary-color);
+    font-size: clamp(2.2rem, 3vw, 2.8rem);
+    margin-bottom: 0.75rem;
+    color: var(--secondary-color); /* Changed text color */
 }
 
 .hero-content p {
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    color: var(--primary-color);
-    margin-bottom: 2rem;
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
+    color: var(--secondary-color); /* Changed text color */
+    margin-bottom: 1.5rem;
+    font-weight: 400;
 }
 
-/* Buttons - Consolidated styling */
-.btn {
-    display: inline-block;
-    padding: 1rem 2rem;
+.hero-content .btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 0.95rem;
+    background-color: var(--accent-color);
+    color: var(--button-text);
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-.learn-more-btn {
-    background-color: var(--button-bg);
-    color: var(--button-text);
+.hero-content .btn:hover {
+    background-color: var(--button-hover);
 }
 
-.learn-more-btn:hover {
-    background-color: var(--button-hover);
+/* Mission Section */
+.mission-section {
+    padding: 2.5rem 1rem;
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.mission-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.mission-content p {
+    font-size: 1rem;
+    color: var(--primary-color);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
 }
 
 /* Feature Grid */
@@ -158,7 +210,13 @@ nav a:hover {
     height: auto;
 }
 
-/* Content Section */
+/* Content Section (for map.html) */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
 .content-section {
     padding: 20px;
     background-color: var(--secondary-color);
@@ -300,22 +358,27 @@ nav a:hover {
 
 .meme-section h2 {
     color: var(--primary-color);
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.meme-section p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 
 #daily-meme {
-    max-width: 50%;
+    max-width: 60%;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
 #new-meme {
     background-color: var(--accent-color);
     color: var(--button-text);
-    padding: 10px 20px;
+    padding: 0.7rem 1.4rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -330,9 +393,11 @@ nav a:hover {
 footer {
     text-align: center;
     padding: 2rem 0;
-    background-color: var(--primary-color);
+    background-color: var(--nav-bg);
     color: var(--secondary-color);
-    font-size: 0.9rem;
+    font-size: var(--footer-font-size);
+    font-family: var(--header-font-family);
+    font-weight: var(--header-font-weight);
 }
 
 /* Map Popup and Marker */
@@ -348,98 +413,4 @@ footer {
     background-color: var(--accent-color);
     color: var(--button-text);
     padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.custom-marker {
-    border: none !important;
-    background: none !important;
-}
-
-/* Dark Mode */
-body.dark-mode {
-    --primary-color: #FFFFFF;
-    --secondary-color: #1A1423;
-    --nav-bg: #412234;
-    --hero-bg: #5e5951;
-    --feature-bg: #332836;
-    --link-color: #99C5B5;
-}
-
-body.dark-mode header {
-    border-bottom-color: #554458;
-}
-
-body.dark-mode nav a {
-    color: #eee;
-}
-
-body.dark-mode .report-box,
-body.dark-mode .feature-item {
-    background-color: var(--feature-bg);
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .report-box label,
-body.dark-mode .report-box h2,
-body.dark-mode .report-box p,
-body.dark-mode .map-container h2,
-body.dark-mode .map-container p,
-body.dark-mode .feature-item h2,
-body.dark-mode .feature-item p {
-    color: #eee;
-}
-
-body.dark-mode .report-box input[type="file"],
-body.dark-mode .report-box textarea,
-body.dark-mode .report-box select {
-    background-color: #443847;
-    border-color: #554458;
-    color: #eee;
-}
-
-body.dark-mode .meme-section,
-body.dark-mode .content-section {
-    background-color:不说: #1A1423;
-}
-
-body.dark-mode footer {
-    background-color: #412234;
-    color: #eee;
-}
-
-/* Icon Styles */
-.icon-wheelchair { font-size: 3rem; color: #99C5B5; }
-.icon-reports { font-size: 3rem; color: #899E8B; }
-.icon-users { font-size: 3rem; color: #706C61; }
-.icon-map { font-size: 3rem; color: #99C5B5; }
-
-/* Media Queries */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .hero-section {
-        padding: 2rem 0;
-        min-height: 300px;
-    }
-
-    .feature-grid {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
-
-    .report-box,
-    .map-container {
-        width: 95%;
-    }
-
-    #daily-meme {
-        max-width: 90%;
-    }
 }
