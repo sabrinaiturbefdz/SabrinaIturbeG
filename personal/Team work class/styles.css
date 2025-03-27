@@ -217,18 +217,14 @@ nav a:hover {
     padding: 20px;
 }
 
-.content-section {
-    padding: 20px;
-    background-color: var(--secondary-color);
+.map-page-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 20px;
+    align-items: flex-start; /* Align top edges of the two sections */
 }
 
 .report-box {
-    width: 80%;
-    max-width: 600px;
+    flex: 1; /* Takes up available space */
     padding: 20px;
     background-color: var(--feature-bg);
     border-radius: 8px;
@@ -304,8 +300,7 @@ nav a:hover {
 }
 
 .map-container {
-    width: 80%;
-    max-width: 800px;
+    flex: 2; /* Takes up more available space */
 }
 
 .map-container h2 {
@@ -323,30 +318,9 @@ nav a:hover {
 }
 
 #map {
-    height: 400px;
+    height: 500px; /* Increased map height for better visualization */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.theme-toggle {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.theme-toggle button {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.theme-toggle button:hover {
-    background-color: #5a6268;
 }
 
 /* Meme Section */
@@ -392,12 +366,36 @@ nav a:hover {
 /* Footer */
 footer {
     text-align: center;
-    padding: 2rem 0;
+    padding: 1rem 0; /* Reduced top/bottom padding */
     background-color: var(--nav-bg);
     color: var(--secondary-color);
     font-size: var(--footer-font-size);
     font-family: var(--header-font-family);
     font-weight: var(--header-font-weight);
+    display: flex; /* Enable flexbox for alignment */
+    flex-direction: column; /* Stack items vertically by default */
+    align-items: center; /* Center items horizontally */
+    gap: 0.5rem; /* Add some space between footer elements */
+}
+
+footer .theme-toggle {
+    display: flex;
+    gap: 1rem;
+}
+
+footer .theme-toggle button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem; /* Slightly smaller padding for footer buttons */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+footer .theme-toggle button:hover {
+    background-color: #5a6268;
 }
 
 /* Map Popup and Marker */
@@ -413,4 +411,77 @@ footer {
     background-color: var(--accent-color);
     color: var(--button-text);
     padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: block; /* Make button full width in popup */
+    margin-top: 0.5rem;
+    font-size: 0.9rem; /* Match button font size */
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    --primary-color: #F0F0F0;
+    --secondary-color: #1A1423;
+    --feature-bg: #2C2C2C;
+    --nav-bg: #333333;
+    --link-color: #A9D18E;
+}
+
+.dark-mode body {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.dark-mode header {
+    background-color: var(--nav-bg);
+    border-bottom-color: #555;
+}
+
+.dark-mode nav a {
+    color: var(--primary-color);
+}
+
+.dark-mode nav a:hover {
+    color: var(--link-color);
+}
+
+.dark-mode .report-box {
+    background-color: var(--feature-bg);
+    color: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .report-box label,
+.dark-mode .report-box p,
+.dark-mode .report-box h2 {
+    color: var(--primary-color);
+}
+
+.dark-mode .map-container h2,
+.dark-mode .map-container p {
+    color: var(--primary-color);
+}
+
+.dark-mode #map {
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode footer {
+    background-color: var(--nav-bg);
+    color: var(--primary-color);
+}
+
+/* Light Mode Styles (applied by default) */
+.light-mode {
+    /* Inherits from the root */
+}
+
+.map-info {
+    font-size: 0.9em;
+    color: var(--primary-color);
+    margin-top: 10px;
+    text-align: center;
 }
