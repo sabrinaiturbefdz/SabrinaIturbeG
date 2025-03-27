@@ -10,6 +10,7 @@
 </head>
 <body>
     <header>
+        <img src="images/logo.png" alt="Rexburg Chaos Logo" class="logo">
         <div class="header-title">Rexburg Chaos</div>
         <nav>
             <ul>
@@ -22,7 +23,7 @@
     </header>
 
     <div class="content-wrapper">
-        <section class="content-section" id="content">
+        <section class="map-page-container">
             <div class="report-box">
                 <h2>Report a Hazard</h2>
                 <p>Help keep Rexburg safe! Pinpoint icy spots or other sidewalk issues.</p>
@@ -54,16 +55,16 @@
                 <h2>Rexburg Slip & Trip Map</h2>
                 <p><span style="color: #FF6F61; font-weight: bold;">Red Markers</span> indicate reported hazards. <span style="color: #6CC644; font-weight: bold;">Green Markers</span> show areas marked as clear.</p>
                 <div id="map"></div>
-                <div class="theme-toggle">
-                    <button id="dark-mode">Night Mode</button>
-                    <button id="light-mode">Day Mode</button>
-                </div>
                 <p class="map-info">Click on the map to report a new issue. Tap on markers to view details or mark an area as resolved.</p>
             </div>
         </section>
     </div>
 
     <footer>
+        <div class="theme-toggle">
+            <button id="dark-mode">Night Mode</button>
+            <button id="light-mode">Day Mode</button>
+        </div>
         <p>© 2025 Rexburg Chaos</p>
     </footer>
 
@@ -179,16 +180,16 @@
 
             if (report.status === "resolved" && report.resolvedImage) {
                 content += `
-                    <p><strong>Marked Clear On:</strong> ${report.resolvedDate}</p>
-                    <img src="${report.resolvedImage}" alt="Resolved" class="popup-image">
+                        <p><strong>Marked Clear On:</strong> ${report.resolvedDate}</p>
+                        <img src="${report.resolvedImage}" alt="Resolved" class="popup-image">
                 `;
             } else {
                 content += `
-                    <form id="resolve-form-${report.id}" enctype="multipart/form-data">
-                        <label for="resolve-image-${report.id}">Photo of Cleared Area:</label>
-                        <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
-                        <button type="submit" class="resolve-btn">Mark as Clear</button>
-                    </form>
+                        <form id="resolve-form-${report.id}" enctype="multipart/form-data">
+                            <label for="resolve-image-${report.id}">Photo of Cleared Area:</label>
+                            <input type="file" id="resolve-image-${report.id}" accept="image/*" required>
+                            <button type="submit" class="resolve-btn">Mark as Clear</button>
+                        </form>
                 `;
             }
 
@@ -220,24 +221,20 @@
         }
 
         // Theme Toggle
-        document.getElementById('dark-mode').addEventListener('click', () => {
+        const darkModeButton = document.getElementById('dark-mode');
+        const lightModeButton = document.getElementById('light-mode');
+
+        darkModeButton.addEventListener('click', () => {
             document.body.classList.add('dark-mode');
             document.body.classList.remove('light-mode');
         });
-        document.getElementById('light-mode').addEventListener('click', () => {
+
+        lightModeButton.addEventListener('click', () => {
             document.body.classList.add('light-mode');
             document.body.classList.remove('dark-mode');
         });
 
         window.onload = initMap;
     </script>
-    <style>
-        .map-info {
-            font-size: 0.9em;
-            color: var(--primary-color);
-            margin-top: 10px;
-            text-align: center;
-        }
-    </style>
 </body>
 </html>
