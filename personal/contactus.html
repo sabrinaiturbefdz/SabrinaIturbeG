@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews & Contact</title>
+    <style>
+        /* HEADER STYLE */
+        header {
+        background-color: #0c293d;
+        padding: 1rem 1rem;
+        border-bottom: 1px solid #5e5951;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        }
+   
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 80%;
+            object-fit: cover;
+        }
+       
+        .header-title {
+            color: #F0F0F0;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+       
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+       
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+        }
+       
+        nav a {
+            text-decoration: none;
+            color: #F0F0F0;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            font-family: 'Poppins', sans-serif ;
+            font-size: 1rem;
+        }
+       
+        nav a:hover {
+            color: #194769;
+        }
+            /* HEADER STYLE */
+ 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #F9E7E7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact {
+            width: 50%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            max-width: 1000px;
+            gap: 20px;
+            justify-content: flex-start;
+            width: 100%;
+        }
+        .review {
+            flex: 1;
+            max-width: 35%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 80px;
+        }
+        .review-images {
+            flex: 1;
+            max-width: 35%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .reviews-list {
+            margin-top: 20px;
+        }
+        .review-box {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .review-images {
+                max-width: 80%;
+                padding: 0px;
+           
+            }
+            .container{
+                flex-direction: column-reverse;
+                justify-content: center;
+                align-items: center;
+            }
+            .review {
+            margin-left: 0px;
+            padding: 0px;
+            max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Rexburg Chaos Logo" class="logo">
+        <div class="header-title">Rexburg Chaos</div>
+        <nav>
+        <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Map</a></li>
+        <li><a href="#">Review</a></li>
+        </ul>
+        </nav>
+    </header>
+    <div class="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <div class="container">
+        <div class="review">
+            <h2>Customer Reviews</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <textarea placeholder="Your Review" rows="4" required></textarea>
+                <button type="submit">Submit Review</button>
+            </form>
+            <div class="reviews-list">
+                <div class="review-box"><strong>John Doe:</strong> Great service! Highly recommend.</div>
+                <div class="review-box"><strong>Jane Smith:</strong> Amazing experience, will be back again!</div>
+                <div class="review-box"><strong>Michael Johnson:</strong> Fast delivery and excellent quality!</div>
+                <div class="review-box"><strong>Emily Davis:</strong> The customer support was super helpful!</div>
+                <div class="review-box"><strong>Chris Brown:</strong> Fantastic products, exceeded my expectations!</div>
+                <div class="review-box"><strong>Sarah Wilson:</strong> Would definitely buy from here again!</div>
+                <div class="review-box"><strong>David Martinez:</strong> Affordable prices and great quality.</div>
+                <div class="review-box"><strong>Olivia Taylor:</strong> I love the attention to detail in their service!</div>
+            </div>
+        </div>
+        <div class="review-images">
+            <h2>Review Pictures</h2>
+            <p>Images of customer reviews will appear here.</p>
+        </div>
+    </div>
+</body>
+</html>
