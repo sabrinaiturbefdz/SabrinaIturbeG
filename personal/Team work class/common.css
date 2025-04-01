@@ -1,0 +1,79 @@
+:root {
+  /* --coral: #FF6F61;      Fun, youthful coral */
+  /* --mint: #6CC644;       Fresh green */
+  /* --dark: #2D2D2D;       Sleek dark */
+  /* --light: #F9E7E7;      Soft light pink */
+  /* --light-accent1: #ffdfdf;  */
+  /* --gray: #A9A9A9;       Neutral gray */
+  /* --white: #FFFFFF; */
+}
+:root {
+  /* Color palette */
+  --primary-color: #1A1423;
+  --secondary-color: #F0F0F0;
+  --accent-color: #194769;
+  --link-color: #412234;
+  --nav-bg: #0c293d;
+  --hero-bg: var(--nav-bg); /* Changed --hero-bg to use --nav-bg */
+  --feature-bg: #FFFFFF;
+  --button-bg: var(--accent-color);
+  --button-text: white;
+  --button-hover: #518396;
+  --header-font-family: 'Poppins', sans-serif;
+  --header-font-weight: 600;
+  --footer-font-size: 0.9rem;
+}
+
+/* Header and Navigation */
+header {
+  background-color: var(--nav-bg);
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #5e5951;
+  display: flex;
+  justify-content: flex-start; /* Align items to the start to accommodate the logo */
+  align-items: center;
+  gap: 15px; /* Add some space between the logo and title */
+}
+
+.logo {
+  width: 80px; /* Adjust size as needed */
+  height: 80px; /* Adjust size as needed */
+  border-radius: 80%;
+  object-fit: cover; /* Ensures the image fills the circle without distortion */
+}
+
+.header-title {
+  color: var(--secondary-color);
+  font-size: 1rem;
+  font-weight: var(--header-font-weight);
+  font-family: var(--header-font-family);
+}
+
+nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: var(--header-font-weight);
+  transition: color 0.3s ease;
+  font-family: var(--header-font-family);
+  font-size: 1rem;
+}
+
+nav a:hover {
+  color: var(--accent-color);
+}
