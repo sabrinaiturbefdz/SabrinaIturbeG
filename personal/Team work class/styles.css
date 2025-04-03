@@ -323,45 +323,28 @@ nav a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Meme Section */
-.meme-section {
-    padding: 30px;
-    text-align: center;
-    background-color: var(--secondary-color);
-}
 
-.meme-section h2 {
-    color: var(--primary-color);
-    font-size: 1.8rem;
-    margin-bottom: 0.75rem;
-}
+    .success-banner {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 5px;
+        z-index: 1000;
+        animation: fadeOut 3s forwards;
+    }
 
-.meme-section p {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-}
+    @keyframes fadeOut {
+        0% { opacity: 1; }
+        90% {opacity:1;}
+        100% { opacity: 0; display:none; }
+    }
+</style>
 
-#daily-meme {
-    max-width: 60%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
-}
 
-#new-meme {
-    background-color: var(--accent-color);
-    color: var(--button-text);
-    padding: 0.7rem 1.4rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#new-meme:hover {
-    background-color: var(--button-hover);
-}
 
 /* Footer */
 footer {
